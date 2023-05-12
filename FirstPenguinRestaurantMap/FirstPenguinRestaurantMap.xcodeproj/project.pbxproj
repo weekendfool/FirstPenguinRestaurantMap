@@ -1,0 +1,779 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		839D0218D72E1508BF463731 /* Pods_FirstPenguinRestaurantMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8200A85CC73BAE41DA6A8130 /* Pods_FirstPenguinRestaurantMap.framework */; };
+		8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */; };
+		8CB5E8542A0EC04600C04AF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */; };
+		8CB5E8562A0EC04600C04AF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8552A0EC04600C04AF7 /* ViewController.swift */; };
+		8CB5E8592A0EC04600C04AF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E8572A0EC04600C04AF7 /* Main.storyboard */; };
+		8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */; };
+		8CB5E85E2A0EC04800C04AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */; };
+		8CB5E8612A0EC04800C04AF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */; };
+		8CB5E86C2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E86B2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.swift */; };
+		8CB5E8762A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8752A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.swift */; };
+		8CB5E8782A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8772A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITestsLaunchTests.swift */; };
+		CAE4FE1DC65C294EA1D87EF6 /* Pods_FirstPenguinRestaurantMapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E83BFC84903CD4975E5C10B3 /* Pods_FirstPenguinRestaurantMapTests.framework */; };
+		DE104539D62926DC9AB9D304 /* Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F66F6EEF9E34636EC6F69FA /* Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8CB5E8682A0EC04900C04AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CB5E8462A0EC04600C04AF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CB5E84D2A0EC04600C04AF7;
+			remoteInfo = FirstPenguinRestaurantMap;
+		};
+		8CB5E8722A0EC04900C04AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CB5E8462A0EC04600C04AF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CB5E84D2A0EC04600C04AF7;
+			remoteInfo = FirstPenguinRestaurantMap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0252B5F2546154BFD71EE4E2 /* Pods-FirstPenguinRestaurantMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMap.release.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMap/Pods-FirstPenguinRestaurantMap.release.xcconfig"; sourceTree = "<group>"; };
+		1F66F6EEF9E34636EC6F69FA /* Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25A8F2DB4C96F95F34321EAC /* Pods-FirstPenguinRestaurantMapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMapTests.debug.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMapTests/Pods-FirstPenguinRestaurantMapTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2F7A6177B616357E3F6E1D2C /* Pods-FirstPenguinRestaurantMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMap.debug.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMap/Pods-FirstPenguinRestaurantMap.debug.xcconfig"; sourceTree = "<group>"; };
+		8200A85CC73BAE41DA6A8130 /* Pods_FirstPenguinRestaurantMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstPenguinRestaurantMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguinRestaurantMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8CB5E8552A0EC04600C04AF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8CB5E8582A0EC04600C04AF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8CB5E85B2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FirstPenguinRestaurantMap.xcdatamodel; sourceTree = "<group>"; };
+		8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CB5E8602A0EC04800C04AF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8CB5E8622A0EC04800C04AF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CB5E8672A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstPenguinRestaurantMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB5E86B2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPenguinRestaurantMapTests.swift; sourceTree = "<group>"; };
+		8CB5E8712A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstPenguinRestaurantMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB5E8752A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPenguinRestaurantMapUITests.swift; sourceTree = "<group>"; };
+		8CB5E8772A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPenguinRestaurantMapUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B0D0CA0A8916D1049CE634B7 /* Pods-FirstPenguinRestaurantMapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMapTests.release.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMapTests/Pods-FirstPenguinRestaurantMapTests.release.xcconfig"; sourceTree = "<group>"; };
+		D5DFC7D10AB50053DD630061 /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.release.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E364BBE5C780217A9D25408F /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.debug.xcconfig"; path = "Target Support Files/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E83BFC84903CD4975E5C10B3 /* Pods_FirstPenguinRestaurantMapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstPenguinRestaurantMapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8CB5E84B2A0EC04600C04AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839D0218D72E1508BF463731 /* Pods_FirstPenguinRestaurantMap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E8642A0EC04900C04AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE4FE1DC65C294EA1D87EF6 /* Pods_FirstPenguinRestaurantMapTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E86E2A0EC04900C04AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE104539D62926DC9AB9D304 /* Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CE4D393880568873DD41369 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8200A85CC73BAE41DA6A8130 /* Pods_FirstPenguinRestaurantMap.framework */,
+				1F66F6EEF9E34636EC6F69FA /* Pods_FirstPenguinRestaurantMap_FirstPenguinRestaurantMapUITests.framework */,
+				E83BFC84903CD4975E5C10B3 /* Pods_FirstPenguinRestaurantMapTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7AD55397B5A1C3EB72B6649F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F7A6177B616357E3F6E1D2C /* Pods-FirstPenguinRestaurantMap.debug.xcconfig */,
+				0252B5F2546154BFD71EE4E2 /* Pods-FirstPenguinRestaurantMap.release.xcconfig */,
+				E364BBE5C780217A9D25408F /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.debug.xcconfig */,
+				D5DFC7D10AB50053DD630061 /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.release.xcconfig */,
+				25A8F2DB4C96F95F34321EAC /* Pods-FirstPenguinRestaurantMapTests.debug.xcconfig */,
+				B0D0CA0A8916D1049CE634B7 /* Pods-FirstPenguinRestaurantMapTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8CB5E8452A0EC04600C04AF7 = {
+			isa = PBXGroup;
+			children = (
+				8CB5E8502A0EC04600C04AF7 /* FirstPenguinRestaurantMap */,
+				8CB5E86A2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests */,
+				8CB5E8742A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests */,
+				8CB5E84F2A0EC04600C04AF7 /* Products */,
+				7AD55397B5A1C3EB72B6649F /* Pods */,
+				3CE4D393880568873DD41369 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8CB5E84F2A0EC04600C04AF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */,
+				8CB5E8672A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.xctest */,
+				8CB5E8712A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CB5E8502A0EC04600C04AF7 /* FirstPenguinRestaurantMap */ = {
+			isa = PBXGroup;
+			children = (
+				8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */,
+				8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */,
+				8CB5E8552A0EC04600C04AF7 /* ViewController.swift */,
+				8CB5E8572A0EC04600C04AF7 /* Main.storyboard */,
+				8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */,
+				8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */,
+				8CB5E8622A0EC04800C04AF7 /* Info.plist */,
+				8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */,
+			);
+			path = FirstPenguinRestaurantMap;
+			sourceTree = "<group>";
+		};
+		8CB5E86A2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests */ = {
+			isa = PBXGroup;
+			children = (
+				8CB5E86B2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.swift */,
+			);
+			path = FirstPenguinRestaurantMapTests;
+			sourceTree = "<group>";
+		};
+		8CB5E8742A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8CB5E8752A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.swift */,
+				8CB5E8772A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITestsLaunchTests.swift */,
+			);
+			path = FirstPenguinRestaurantMapUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8CB5E84D2A0EC04600C04AF7 /* FirstPenguinRestaurantMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB5E87B2A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMap" */;
+			buildPhases = (
+				E701CEEC3A5D4E85ACE4AF69 /* [CP] Check Pods Manifest.lock */,
+				8CB5E84A2A0EC04600C04AF7 /* Sources */,
+				8CB5E84B2A0EC04600C04AF7 /* Frameworks */,
+				8CB5E84C2A0EC04600C04AF7 /* Resources */,
+				CF5A70C91D36E4C77AA570ED /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirstPenguinRestaurantMap;
+			productName = FirstPenguinRestaurantMap;
+			productReference = 8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8CB5E8662A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB5E87E2A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMapTests" */;
+			buildPhases = (
+				FC6607633D2C538A08D9D97D /* [CP] Check Pods Manifest.lock */,
+				8CB5E8632A0EC04900C04AF7 /* Sources */,
+				8CB5E8642A0EC04900C04AF7 /* Frameworks */,
+				8CB5E8652A0EC04900C04AF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CB5E8692A0EC04900C04AF7 /* PBXTargetDependency */,
+			);
+			name = FirstPenguinRestaurantMapTests;
+			productName = FirstPenguinRestaurantMapTests;
+			productReference = 8CB5E8672A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8CB5E8702A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB5E8812A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMapUITests" */;
+			buildPhases = (
+				8605C4A47E17D39B13F8B1CE /* [CP] Check Pods Manifest.lock */,
+				8CB5E86D2A0EC04900C04AF7 /* Sources */,
+				8CB5E86E2A0EC04900C04AF7 /* Frameworks */,
+				8CB5E86F2A0EC04900C04AF7 /* Resources */,
+				A41D63F3E81B3D64E1751E1E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CB5E8732A0EC04900C04AF7 /* PBXTargetDependency */,
+			);
+			name = FirstPenguinRestaurantMapUITests;
+			productName = FirstPenguinRestaurantMapUITests;
+			productReference = 8CB5E8712A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CB5E8462A0EC04600C04AF7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					8CB5E84D2A0EC04600C04AF7 = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					8CB5E8662A0EC04900C04AF7 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 8CB5E84D2A0EC04600C04AF7;
+					};
+					8CB5E8702A0EC04900C04AF7 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 8CB5E84D2A0EC04600C04AF7;
+					};
+				};
+			};
+			buildConfigurationList = 8CB5E8492A0EC04600C04AF7 /* Build configuration list for PBXProject "FirstPenguinRestaurantMap" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8CB5E8452A0EC04600C04AF7;
+			productRefGroup = 8CB5E84F2A0EC04600C04AF7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CB5E84D2A0EC04600C04AF7 /* FirstPenguinRestaurantMap */,
+				8CB5E8662A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests */,
+				8CB5E8702A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CB5E84C2A0EC04600C04AF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB5E8612A0EC04800C04AF7 /* LaunchScreen.storyboard in Resources */,
+				8CB5E85E2A0EC04800C04AF7 /* Assets.xcassets in Resources */,
+				8CB5E8592A0EC04600C04AF7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E8652A0EC04900C04AF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E86F2A0EC04900C04AF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8605C4A47E17D39B13F8B1CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A41D63F3E81B3D64E1751E1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests/Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF5A70C91D36E4C77AA570ED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap/Pods-FirstPenguinRestaurantMap-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap/Pods-FirstPenguinRestaurantMap-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstPenguinRestaurantMap/Pods-FirstPenguinRestaurantMap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E701CEEC3A5D4E85ACE4AF69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstPenguinRestaurantMap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC6607633D2C538A08D9D97D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstPenguinRestaurantMapTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8CB5E84A2A0EC04600C04AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB5E8562A0EC04600C04AF7 /* ViewController.swift in Sources */,
+				8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */,
+				8CB5E8542A0EC04600C04AF7 /* SceneDelegate.swift in Sources */,
+				8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E8632A0EC04900C04AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB5E86C2A0EC04900C04AF7 /* FirstPenguinRestaurantMapTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CB5E86D2A0EC04900C04AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB5E8782A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITestsLaunchTests.swift in Sources */,
+				8CB5E8762A0EC04900C04AF7 /* FirstPenguinRestaurantMapUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8CB5E8692A0EC04900C04AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CB5E84D2A0EC04600C04AF7 /* FirstPenguinRestaurantMap */;
+			targetProxy = 8CB5E8682A0EC04900C04AF7 /* PBXContainerItemProxy */;
+		};
+		8CB5E8732A0EC04900C04AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CB5E84D2A0EC04600C04AF7 /* FirstPenguinRestaurantMap */;
+			targetProxy = 8CB5E8722A0EC04900C04AF7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8CB5E8572A0EC04600C04AF7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CB5E8582A0EC04600C04AF7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CB5E8602A0EC04800C04AF7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8CB5E8792A0EC04900C04AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8CB5E87A2A0EC04900C04AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8CB5E87C2A0EC04900C04AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F7A6177B616357E3F6E1D2C /* Pods-FirstPenguinRestaurantMap.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FirstPenguinRestaurantMap/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8CB5E87D2A0EC04900C04AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0252B5F2546154BFD71EE4E2 /* Pods-FirstPenguinRestaurantMap.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FirstPenguinRestaurantMap/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMap;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8CB5E87F2A0EC04900C04AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25A8F2DB4C96F95F34321EAC /* Pods-FirstPenguinRestaurantMapTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstPenguinRestaurantMap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FirstPenguinRestaurantMap";
+			};
+			name = Debug;
+		};
+		8CB5E8802A0EC04900C04AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0D0CA0A8916D1049CE634B7 /* Pods-FirstPenguinRestaurantMapTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstPenguinRestaurantMap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FirstPenguinRestaurantMap";
+			};
+			name = Release;
+		};
+		8CB5E8822A0EC04900C04AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E364BBE5C780217A9D25408F /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMapUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FirstPenguinRestaurantMap;
+			};
+			name = Debug;
+		};
+		8CB5E8832A0EC04900C04AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5DFC7D10AB50053DD630061 /* Pods-FirstPenguinRestaurantMap-FirstPenguinRestaurantMapUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4VA5NBL27P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.tukareta.nori.FirstPenguinRestaurantMapUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FirstPenguinRestaurantMap;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8CB5E8492A0EC04600C04AF7 /* Build configuration list for PBXProject "FirstPenguinRestaurantMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB5E8792A0EC04900C04AF7 /* Debug */,
+				8CB5E87A2A0EC04900C04AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CB5E87B2A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB5E87C2A0EC04900C04AF7 /* Debug */,
+				8CB5E87D2A0EC04900C04AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CB5E87E2A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB5E87F2A0EC04900C04AF7 /* Debug */,
+				8CB5E8802A0EC04900C04AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CB5E8812A0EC04900C04AF7 /* Build configuration list for PBXNativeTarget "FirstPenguinRestaurantMapUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB5E8822A0EC04900C04AF7 /* Debug */,
+				8CB5E8832A0EC04900C04AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8CB5E85B2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodel */,
+			);
+			currentVersion = 8CB5E85B2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodel */;
+			path = FirstPenguinRestaurantMap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8CB5E8462A0EC04600C04AF7 /* Project object */;
+}

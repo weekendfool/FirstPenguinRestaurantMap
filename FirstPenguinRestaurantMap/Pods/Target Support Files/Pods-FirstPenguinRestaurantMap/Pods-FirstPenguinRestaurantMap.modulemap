@@ -1,0 +1,6 @@
+framework module Pods_FirstPenguinRestaurantMap {
+  umbrella header "Pods-FirstPenguinRestaurantMap-umbrella.h"
+
+  export *
+  module * { export * }
+}

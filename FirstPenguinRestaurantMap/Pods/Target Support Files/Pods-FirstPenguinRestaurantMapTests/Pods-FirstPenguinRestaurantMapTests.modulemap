@@ -1,0 +1,6 @@
+framework module Pods_FirstPenguinRestaurantMapTests {
+  umbrella header "Pods-FirstPenguinRestaurantMapTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
