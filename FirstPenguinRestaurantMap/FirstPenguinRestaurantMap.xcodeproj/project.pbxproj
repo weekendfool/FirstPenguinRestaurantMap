@@ -75,6 +75,7 @@
 		8C7A6D252A0ECB84002BC73C /* ConditionalInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputViewController.swift; sourceTree = "<group>"; };
 		8C7A6D272A0ECB91002BC73C /* ConditionalInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputViewModel.swift; sourceTree = "<group>"; };
 		8C7A6D292A0ECD5D002BC73C /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		8C7A6D2B2A0ED19C002BC73C /* 簡易仕様書.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "簡易仕様書.md"; sourceTree = "<group>"; };
 		8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguinRestaurantMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +255,7 @@
 		8CB5E8502A0EC04600C04AF7 /* FirstPenguinRestaurantMap */ = {
 			isa = PBXGroup;
 			children = (
+				8C7A6D2B2A0ED19C002BC73C /* 簡易仕様書.md */,
 				8C7A6D042A0EC952002BC73C /* Model */,
 				8C7A6D032A0EC941002BC73C /* View */,
 				8C7A6D022A0EC935002BC73C /* ViewModel */,
