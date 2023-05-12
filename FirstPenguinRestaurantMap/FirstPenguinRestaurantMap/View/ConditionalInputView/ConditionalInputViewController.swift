@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import MapKit
 
 class ConditionalInputViewController: UIViewController {
     
     // MARK: - UIパーツ
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var distanceSlider: UISlider!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
     // MARK: - 変数
     // MARK: - ライフサイクル
    
