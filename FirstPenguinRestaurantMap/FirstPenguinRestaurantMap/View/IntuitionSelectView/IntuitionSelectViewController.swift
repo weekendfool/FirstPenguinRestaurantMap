@@ -9,10 +9,18 @@ import UIKit
 
 class IntuitionSelectViewController: UIViewController {
     // MARK: - UIパーツ
-    // MARK: - 変数
-    // MARK: - ライフサイクル
-   
     
+    @IBOutlet weak var numberOfRestaurantsLabel: UILabel!
+    @IBOutlet weak var resutaurantNameLabel: UILabel!
+    @IBOutlet weak var accessLabel: UILabel!
+    @IBOutlet weak var resutaurantImageView: UIImageView!
+    @IBOutlet weak var badButton: UIButton!
+    @IBOutlet weak var goodButton: UIButton!
+    @IBOutlet weak var goMapViewButton: UIButton!
+    
+    // MARK: - 変数
+    
+    // MARK: - ライフサイクル
 
     override func viewDidLoad() {
         super.viewDidLoad()
