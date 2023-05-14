@@ -5,8 +5,10 @@
 //  Created by Oh!ara on 2023/05/13.
 //
 
+// apiの通信管理
+
 import Foundation
-import RxCocoa
+//import RxCocoa
 import RxSwift
 import Alamofire
 
@@ -31,11 +33,45 @@ final class APIModel {
     
     // MARK: - 関数
     
-    func getData(lat: String, lng: String, range: range) {
+    func getData(lat: String, lng: String, range: range) -> Observable<Data?> {
+        
+        // リクエスト用URL生成
         let urlString = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apiKey)&lat=\(lat)&lng=\(lng)&range=\(range.isValue)"
+        
+        let encodeUrlString: String = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let url = URL(string: encodeUrlString)
+        
+        
+        return Observable.create { observable in
+            
+            AF.request(url!).responseJSON { response in
+                switch response.result {
+                case .success:
+                    observable.onNext(response.data)
+                case .failure:
+                    observable.onNext(nil)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     // 情報の取得
+    
+    // デコード
+    func decodeData(data: Data) -> Observable<[APIDataModel]> {
+        return Observable.create { observable in
+            
+            let decoder: JSONDecoder = JSONDecoder()
+            
+            let restaurantData: APIDataModel = try! decoder.decode(APIDataModel.self, from: data)
+            
+            observable.onNext([restaurantData])
+            
+            return Disposables.create()
+        }
+    }
 }
 
 // 検索範囲の段階
