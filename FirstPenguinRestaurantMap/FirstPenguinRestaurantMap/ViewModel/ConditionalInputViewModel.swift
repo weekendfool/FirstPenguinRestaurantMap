@@ -20,6 +20,7 @@ protocol ConditionalInputViewModelType {
 
 final class ConditionalInputViewModel {
 
+    private let apiModel: APIModel = APIModel()
 }
 
 extension ConditionalInputViewModel: ConditionalInputViewModelType {
@@ -41,13 +42,47 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
     }
     
     struct viewModelOutput {
+        // 通信状況
+        let comunnicationState: Driver<networkstate>
+        
+        let getData: Driver<Data?>
         // 距離
-        let distance: Driver<Float>
+//        let distance: Driver<Float>
+        // 画面遷移
+        let goIntuitionSelectView: Driver<[APIDataModel]>
     }
     
     
     func transform(input: viewModelInput) -> viewModelOutput {
-        <#code#>
+        
+        // 通信状況
+        let comunnicationState = input.comunnicationState
+            .map { state in
+                return state[0] as! networkstate
+            }
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let getData = input.tappedSearchButton.asObservable()
+            .withLatestFrom(input.inputDistanceSlider) { tapped, distance  in
+                self.apiModel.getData(lat: String(distance), lng: String(distance), range: .first)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let goIntuitionSelectView = getData.asObservable()
+            .filter { $0 != nil }
+            .map { data in
+                self.apiModel.decodeData(data: data!)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+       
+        
+        return viewModelOutput(
+            comunnicationState: comunnicationState,
+            getData: getData,
+            goIntuitionSelectView: goIntuitionSelectView
+        )
     }
     
 }
