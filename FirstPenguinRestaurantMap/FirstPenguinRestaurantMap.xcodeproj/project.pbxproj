@@ -25,6 +25,10 @@
 		8C7A6D282A0ECB91002BC73C /* ConditionalInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D272A0ECB91002BC73C /* ConditionalInputViewModel.swift */; };
 		8C7A6D2A2A0ECD5D002BC73C /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D292A0ECD5D002BC73C /* APIModel.swift */; };
 		8C7A6D2D2A0FDC87002BC73C /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */; };
+		8C7A6D2F2A10CB34002BC73C /* NWPathMonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */; };
+		8C7A6D312A10CC96002BC73C /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D302A10CC96002BC73C /* RouterModel.swift */; };
+		8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */; };
+		8C7A6D362A1121B8002BC73C /* APIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D352A1121B8002BC73C /* APIDataModel.swift */; };
 		8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */; };
 		8CB5E8542A0EC04600C04AF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */; };
 		8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */; };
@@ -78,6 +82,10 @@
 		8C7A6D292A0ECD5D002BC73C /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		8C7A6D2B2A0ED19C002BC73C /* 簡易仕様書.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "簡易仕様書.md"; sourceTree = "<group>"; };
 		8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWPathMonitorModel.swift; sourceTree = "<group>"; };
+		8C7A6D302A10CC96002BC73C /* RouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
+		8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
+		8C7A6D352A1121B8002BC73C /* APIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataModel.swift; sourceTree = "<group>"; };
 		8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguinRestaurantMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,9 +182,11 @@
 		8C7A6D042A0EC952002BC73C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8C7A6D052A0EC95A002BC73C /* DataModel */,
-				8C7A6D292A0ECD5D002BC73C /* APIModel.swift */,
 				8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */,
+				8C7A6D292A0ECD5D002BC73C /* APIModel.swift */,
+				8C7A6D302A10CC96002BC73C /* RouterModel.swift */,
+				8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */,
+				8C7A6D052A0EC95A002BC73C /* DataModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +194,7 @@
 		8C7A6D052A0EC95A002BC73C /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				8C7A6D352A1121B8002BC73C /* APIDataModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -233,6 +244,14 @@
 			path = RestaurantInfoView;
 			sourceTree = "<group>";
 		};
+		8C7A6D322A10CCB3002BC73C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8CB5E8452A0EC04600C04AF7 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +282,7 @@
 				8C7A6D032A0EC941002BC73C /* View */,
 				8C7A6D022A0EC935002BC73C /* ViewModel */,
 				8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */,
+				8C7A6D322A10CCB3002BC73C /* Extension */,
 				8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */,
 				8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */,
 				8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */,
@@ -534,7 +554,10 @@
 			files = (
 				8C7A6D2A2A0ECD5D002BC73C /* APIModel.swift in Sources */,
 				8C7A6D2D2A0FDC87002BC73C /* MapModel.swift in Sources */,
+				8C7A6D312A10CC96002BC73C /* RouterModel.swift in Sources */,
 				8C7A6D202A0ECB5B002BC73C /* MapViewController.swift in Sources */,
+				8C7A6D362A1121B8002BC73C /* APIDataModel.swift in Sources */,
+				8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */,
 				8C7A6D0E2A0ECAD6002BC73C /* RestaurantInfoViewController.swift in Sources */,
 				8C7A6D1C2A0ECB41002BC73C /* IntuitionSelectViewModel.swift in Sources */,
 				8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */,
@@ -546,6 +569,7 @@
 				8C7A6D142A0ECB0B002BC73C /* CarefullySelectViewController.swift in Sources */,
 				8C7A6D102A0ECAE7002BC73C /* RestaurantInfoViewModel.swift in Sources */,
 				8C7A6D282A0ECB91002BC73C /* ConditionalInputViewModel.swift in Sources */,
+				8C7A6D2F2A10CB34002BC73C /* NWPathMonitorModel.swift in Sources */,
 				8C7A6D222A0ECB69002BC73C /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
