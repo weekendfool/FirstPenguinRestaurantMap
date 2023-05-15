@@ -36,20 +36,30 @@ final class APIModel {
     func getData(lat: String, lng: String, range: range) -> Observable<Data?> {
         
         // リクエスト用URL生成
-        let urlString = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apiKey)&lat=\(lat)&lng=\(lng)&range=\(range.isValue)"
+        let urlString = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apiKey)&lat=\(lat)&lng=\(lng)&range=\(range.isValue)&format=json"
         
         let encodeUrlString: String = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         let url = URL(string: encodeUrlString)
         
+        print("url : \(url)")
         
         return Observable.create { observable in
             
             AF.request(url!).responseJSON { response in
+                
+                print("response: \(response.response?.statusCode)")
+                print("result: \(response.data)")
                 switch response.result {
                 case .success:
+                    
+                    print("=======================")
+                    print("ok")
                     observable.onNext(response.data)
                 case .failure:
+                    
+                    print("=======================")
+                    print("No")
                     observable.onNext(nil)
                 }
             }
@@ -60,14 +70,14 @@ final class APIModel {
     // 情報の取得
     
     // デコード
-    func decodeData(data: Data) -> Observable<[APIDataModel]> {
+    func decodeData(data: Data) -> Observable<APIDataModel> {
         return Observable.create { observable in
             
             let decoder: JSONDecoder = JSONDecoder()
             
             let restaurantData: APIDataModel = try! decoder.decode(APIDataModel.self, from: data)
             
-            observable.onNext([restaurantData])
+            observable.onNext(restaurantData)
             
             return Disposables.create()
         }
