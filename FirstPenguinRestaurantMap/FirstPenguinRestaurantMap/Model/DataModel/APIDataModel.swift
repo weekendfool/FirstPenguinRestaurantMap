@@ -10,28 +10,36 @@
 import Foundation
 
 struct APIDataModel: Codable {
-    var results_available: Int
-    var results_returned: Int
-    
-    var results: [shop]
+//    var results_available: Int
+//    var results_returned: String
+    var results: results
+}
+
+struct results: Codable {
+//    var results_returned: String
+    var shop: [shop]
 }
 
 struct shop: Codable {
     // 店名
     var name: String
-    // image
+
     
-    
-    var lat: String
-    var lng: String
+//
+    var lat: Double
+    var lng: Double
     // アクセス
     var mobile_access: String
     // 写真
-    var photo: [mobile]
+    var photo: photo
 }
 
+
+struct photo: Codable {
+    var mobile: mobile
+}
 struct mobile: Codable {
-    
+
     var l: URL
     var s: URL
 }
