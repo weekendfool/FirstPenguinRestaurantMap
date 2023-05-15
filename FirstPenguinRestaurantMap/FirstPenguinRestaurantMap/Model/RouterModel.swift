@@ -7,4 +7,24 @@
 
 // 画面遷移管理
 
-import Foundation
+import UIKit
+
+final class RouterModel {
+    
+    static func showRootConditionalInputView(window: UIWindow) {
+        window.rootViewController = UIStoryboard.conditionalInputViewController
+        
+        window.makeKeyAndVisible()
+    }
+}
+
+extension RouterModel {
+    
+    func show(from: UIViewController, next: UIViewController, animated: Bool = true) {
+        
+        
+        next.modalPresentationStyle = .fullScreen
+        next.modalTransitionStyle = .flipHorizontal
+        from.present(next, animated: animated, completion: nil)
+    }
+}
