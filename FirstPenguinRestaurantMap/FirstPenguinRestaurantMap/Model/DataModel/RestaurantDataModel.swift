@@ -9,7 +9,7 @@
 
 import Foundation
 
-class RestaurantDataModel {
+class RestaurantDataModel: Codable {
     
     var name: String
     var lat: Double

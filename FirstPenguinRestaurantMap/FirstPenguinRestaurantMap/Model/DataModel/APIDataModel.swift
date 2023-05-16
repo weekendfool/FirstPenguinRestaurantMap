@@ -24,8 +24,6 @@ struct shop: Codable {
     // 店名
     var name: String
 
-    
-//
     var lat: Double
     var lng: Double
     // アクセス

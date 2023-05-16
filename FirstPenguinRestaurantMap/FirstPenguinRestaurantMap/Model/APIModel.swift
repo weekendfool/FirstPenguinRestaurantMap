@@ -21,13 +21,14 @@ final class APIModel {
     // apiKey
     let apiKey = "cfbf72a9451eb428"
     var keyWord = ""
-    
     // 緯度
     var lat = ""
     // 経度
     var lng = ""
     // 範囲: 1-5まで
     var range: range = .first
+    
+    
     
     
     
@@ -70,14 +71,14 @@ final class APIModel {
     // 情報の取得
     
     // デコード
-    func decodeData(data: Data) -> Observable<[APIDataModel]> {
+    func decodeData(data: Data) -> Observable<APIDataModel> {
         return Observable.create { observable in
             
             let decoder: JSONDecoder = JSONDecoder()
             
             let restaurantData: APIDataModel = try! decoder.decode(APIDataModel.self, from: data)
             
-            observable.onNext([restaurantData])
+            observable.onNext(restaurantData)
             
             return Disposables.create()
         }
