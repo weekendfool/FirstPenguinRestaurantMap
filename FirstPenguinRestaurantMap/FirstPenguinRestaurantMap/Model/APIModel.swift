@@ -70,14 +70,14 @@ final class APIModel {
     // 情報の取得
     
     // デコード
-    func decodeData(data: Data) -> Observable<APIDataModel> {
+    func decodeData(data: Data) -> Observable<[APIDataModel]> {
         return Observable.create { observable in
             
             let decoder: JSONDecoder = JSONDecoder()
             
             let restaurantData: APIDataModel = try! decoder.decode(APIDataModel.self, from: data)
             
-            observable.onNext(restaurantData)
+            observable.onNext([restaurantData])
             
             return Disposables.create()
         }

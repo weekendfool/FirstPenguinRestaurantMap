@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import RxSwift
 import RxCocoa
+import CoreLocation
 
 class ConditionalInputViewController: UIViewController {
     
@@ -27,32 +28,52 @@ class ConditionalInputViewController: UIViewController {
     
     var userLocation = MKUserLocation()
     
+    //　緯度経度取得用
+    var userLat = "" {
+        didSet {
+            changeLat(lat: userLat)
+        }
+    }
+    var userLng = ""{
+        didSet {
+            changeLng(lng: userLng)
+        }
+    }
+    
     
     // MARK: - ライフサイクル
    
    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapView?.mapType = .standard
         
-        var locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
         CLLocationManager.locationServicesEnabled()
         
+//        locationManager.delegate = self
+        mapView.delegate = self
         
         let status = CLLocationManager.authorizationStatus()
         
         if status == CLAuthorizationStatus.notDetermined {
             locationManager.requestWhenInUseAuthorization()
+//            locationManager.startUpdatingLocation()
+           
         }
+        
+        
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         print("userLocation: \(userLocation)")
+//        userLat = String(userLocation.coordinate.latitude)
+//        userLng = String(userLocation.coordinate.longitude)
         
-        let x = userLocation.coordinate.latitude
+        
+//        locationManager.requestLocation()
+        
         // 祝作
         var ragion = mapView.region
         
@@ -76,6 +97,15 @@ class ConditionalInputViewController: UIViewController {
 
     // MARK: - 関数
     
+    // 画面展開
+    static func makeFromStoryboard() -> ConditionalInputViewController {
+        let vc = UIStoryboard.conditionalInputViewController
+        
+        print("ttttttttttttttttttt")
+        
+        return vc
+    }
+    
     // 通信のセットアップ
     func setupMonitorComunnication() {
         nWPathMonitorModel.monitorComunnication { state  in
@@ -89,11 +119,13 @@ class ConditionalInputViewController: UIViewController {
     func bindViewModel() {
         let isMadeStoryboard = rx.methodInvoked(#selector(viewWillAppear(_:)))
         let comunnicationState = rx.methodInvoked(#selector(getNetworkState))
-        let myPosition = rx.methodInvoked(#selector(getter: mapView))
+        let myLat = rx.methodInvoked(#selector(changeLat))
+        let myLng = rx.methodInvoked(#selector(changeLng))
         
         let input = ConditionalInputViewModel.viewModelInput(
             isMadeStoryboard: isMadeStoryboard,
-            myPosition: myPosition,
+            myLat: myLat,
+            myLng: myLng,
             tappedSearchButton: searchButton.rx.tap.asSignal(),
             comunnicationState: comunnicationState
         )
@@ -107,18 +139,39 @@ class ConditionalInputViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        output.lat
+            .drive { lat in
+                print("lat: \(lat)")
+            }
+            .disposed(by: disposeBag)
+        
+        output.lng
+            .drive { lng in
+                print("lng: \(lng)")
+            }
+            .disposed(by: disposeBag)
+        
+        output.distance
+            .drive { distance in
+                print("distance: \(distance)")
+            }
+            .disposed(by: disposeBag)
+        
         output.getData
             .drive { data in
                 print("----------------")
+//                self.locationManager.requestWhenInUseAuthorization()
                 print("data: \(data)")
+                print("userlocation: \(self.userLocation.coordinate.latitude)")
             }
             .disposed(by: disposeBag)
         
         // 画面遷移
         output.goIntuitionSelectView
-            .drive { info in
+            .drive { [self] info in
                 print("----------------")
                 print("info: \(info)")
+                
             }
             .disposed(by: disposeBag)
     }
@@ -130,12 +183,32 @@ class ConditionalInputViewController: UIViewController {
 extension ConditionalInputViewController: MKMapViewDelegate {
     //　自己位置更新
     @objc func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
         print("更新")
+        userLat = String(userLocation.coordinate.latitude)
+        userLng = String(userLocation.coordinate.longitude)
+        print("userLat : \(userLat)")
+        print("userLng : \(userLng)")
+       
+    }
+}
+
+
+extension ConditionalInputViewController {
+    @objc func getNetworkState(state: Any) {
+        // 登録する
+    }
+}
+
+// 緯度と経度
+extension ConditionalInputViewController {
+    @objc func changeLat(lat: Any) {
+        // 登録する
     }
 }
 
 extension ConditionalInputViewController {
-    @objc func getNetworkState(state: Any) {
+    @objc func changeLng(lng: Any) {
         // 登録する
     }
 }

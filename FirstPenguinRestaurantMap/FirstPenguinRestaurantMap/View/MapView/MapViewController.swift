@@ -23,7 +23,14 @@ class MapViewController: UIViewController {
     
 
     // MARK: - 関数
-
+    // 画面展開
+    static func makeFromStoryboard() -> MapViewController {
+        let vc = UIStoryboard.mapViewController
+        
+        print("ttttttttttttttttttt")
+        
+        return vc
+    }
 }
 
 // MARK: - extension

@@ -29,8 +29,8 @@
 		8C7A6D312A10CC96002BC73C /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D302A10CC96002BC73C /* RouterModel.swift */; };
 		8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */; };
 		8C7A6D362A1121B8002BC73C /* APIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D352A1121B8002BC73C /* APIDataModel.swift */; };
+		8CA79CA92A13B5AA00C29CAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */; };
 		8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */; };
-		8CB5E8542A0EC04600C04AF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */; };
 		8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */; };
 		8CB5E85E2A0EC04800C04AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */; };
 		8CB5E8612A0EC04800C04AF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */; };
@@ -86,9 +86,9 @@
 		8C7A6D302A10CC96002BC73C /* RouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
 		8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		8C7A6D352A1121B8002BC73C /* APIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataModel.swift; sourceTree = "<group>"; };
+		8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguinRestaurantMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8CB5E85B2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FirstPenguinRestaurantMap.xcdatamodel; sourceTree = "<group>"; };
 		8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CB5E8602A0EC04800C04AF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -283,11 +283,11 @@
 				8C7A6D022A0EC935002BC73C /* ViewModel */,
 				8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */,
 				8C7A6D322A10CCB3002BC73C /* Extension */,
-				8CB5E8532A0EC04600C04AF7 /* SceneDelegate.swift */,
 				8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */,
 				8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */,
 				8CB5E8622A0EC04800C04AF7 /* Info.plist */,
 				8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */,
+				8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */,
 			);
 			path = FirstPenguinRestaurantMap;
 			sourceTree = "<group>";
@@ -561,7 +561,6 @@
 				8C7A6D0E2A0ECAD6002BC73C /* RestaurantInfoViewController.swift in Sources */,
 				8C7A6D1C2A0ECB41002BC73C /* IntuitionSelectViewModel.swift in Sources */,
 				8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */,
-				8CB5E8542A0EC04600C04AF7 /* SceneDelegate.swift in Sources */,
 				8C7A6D162A0ECB17002BC73C /* CarefullySelectViewModel.swift in Sources */,
 				8C7A6D262A0ECB84002BC73C /* ConditionalInputViewController.swift in Sources */,
 				8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */,
@@ -569,6 +568,7 @@
 				8C7A6D142A0ECB0B002BC73C /* CarefullySelectViewController.swift in Sources */,
 				8C7A6D102A0ECAE7002BC73C /* RestaurantInfoViewModel.swift in Sources */,
 				8C7A6D282A0ECB91002BC73C /* ConditionalInputViewModel.swift in Sources */,
+				8CA79CA92A13B5AA00C29CAC /* SceneDelegate.swift in Sources */,
 				8C7A6D2F2A10CB34002BC73C /* NWPathMonitorModel.swift in Sources */,
 				8C7A6D222A0ECB69002BC73C /* MapViewModel.swift in Sources */,
 			);
@@ -745,8 +745,8 @@
 				INFOPLIST_FILE = FirstPenguinRestaurantMap/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得します";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = ConditionalInputView;
+				INFOPLIST_KEY_UILaunchStoryboardName = ConditionalInputView.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -775,8 +775,8 @@
 				INFOPLIST_FILE = FirstPenguinRestaurantMap/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を取得します";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = ConditionalInputView;
+				INFOPLIST_KEY_UILaunchStoryboardName = ConditionalInputView.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

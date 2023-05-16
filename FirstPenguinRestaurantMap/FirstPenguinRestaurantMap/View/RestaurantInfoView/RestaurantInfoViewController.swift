@@ -21,7 +21,14 @@ class RestaurantInfoViewController: UIViewController {
     }
     
     // MARK: - 関数
-
+    // 画面展開
+    static func makeFromStoryboard() -> RestaurantInfoViewController {
+        let vc = UIStoryboard.restaurantInfoViewController
+        
+        print("ttttttttttttttttttt")
+        
+        return vc
+    }
 }
 
 // MARK: - extension

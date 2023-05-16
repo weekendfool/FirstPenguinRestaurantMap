@@ -30,6 +30,14 @@ class IntuitionSelectViewController: UIViewController {
     
 
     // MARK: - 関数
+    // 画面展開
+    static func makeFromStoryboard() -> IntuitionSelectViewController {
+        let vc = UIStoryboard.intuitionSelectViewController
+        
+        print("ttttttttttttttttttt")
+        
+        return vc
+    }
 }
 
 // MARK: - extension

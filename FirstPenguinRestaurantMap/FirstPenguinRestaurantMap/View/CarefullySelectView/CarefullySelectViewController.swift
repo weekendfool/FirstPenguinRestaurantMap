@@ -22,6 +22,14 @@ class CarefullySelectViewController: UIViewController {
     
 
     // MARK: - 関数
+    // 画面展開
+    static func makeFromStoryboard() -> CarefullySelectViewController {
+        let vc = UIStoryboard.carefullySelectViewController
+        
+        print("ttttttttttttttttttt")
+        
+        return vc
+    }
 }
 
 // MARK: - extension
