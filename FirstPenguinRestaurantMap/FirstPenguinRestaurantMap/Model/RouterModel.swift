@@ -12,7 +12,13 @@ import UIKit
 final class RouterModel {
     
     static func showRootConditionalInputView(window: UIWindow) {
-        window.rootViewController = UIStoryboard.conditionalInputViewController
+        
+//        let vc = ConditionalInputViewController.makeFromStoryboard()
+        
+//        let x = UIStoryboard.conditionalInputViewController
+//        window.rootViewController = vc
+        
+        window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
         
         window.makeKeyAndVisible()
     }
