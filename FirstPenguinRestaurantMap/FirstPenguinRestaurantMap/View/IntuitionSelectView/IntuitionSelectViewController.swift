@@ -20,12 +20,16 @@ class IntuitionSelectViewController: UIViewController {
     
     // MARK: - 変数
     
+    let resutaurantModel = ResutaurantModel()
+    
     // MARK: - ライフサイクル
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥")
+        print(resutaurantModel.reloadData())
     }
     
 
@@ -33,9 +37,7 @@ class IntuitionSelectViewController: UIViewController {
     // 画面展開
     static func makeFromStoryboard() -> IntuitionSelectViewController {
         let vc = UIStoryboard.intuitionSelectViewController
-        
-        print("ttttttttttttttttttt")
-        
+                
         return vc
     }
 }

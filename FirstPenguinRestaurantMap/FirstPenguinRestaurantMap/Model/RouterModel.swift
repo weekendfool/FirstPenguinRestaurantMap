@@ -11,17 +11,52 @@ import UIKit
 
 final class RouterModel {
     
-    static func showRootConditionalInputView(window: UIWindow) {
+    
+//    static func showRootConditionalInputView(window: UIWindow) {
+//
+//
+//        window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
+//
+//
+//        window.makeKeyAndVisible()
+//    }
+    
+    // 検索画面
+    func showConditionalInputViewController(from: UIViewController) {
+        let vc = ConditionalInputViewController.makeFromStoryboard()
         
-//        let vc = ConditionalInputViewController.makeFromStoryboard()
-        
-//        let x = UIStoryboard.conditionalInputViewController
-//        window.rootViewController = vc
-        
-        window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
-        
-        window.makeKeyAndVisible()
+        show(from: from, next: vc)
     }
+    
+    // 検索結果表示画面
+    func showIntuitionSelectViewController(from: UIViewController) {
+        let vc = IntuitionSelectViewController.makeFromStoryboard()
+        
+        show(from: from, next: vc)
+    }
+    
+    // 地図表示画面
+    func showMapViewController(from: UIViewController) {
+        let vc = MapViewController.makeFromStoryboard()
+        
+        show(from: from, next: vc)
+    }
+    
+    // 画面
+    func showCarefullySelectViewController(from: UIViewController) {
+        let vc = CarefullySelectViewController.makeFromStoryboard()
+        
+        show(from: from, next: vc)
+    }
+    
+    //　店情報画面
+    func showRestaurantInfoViewController(from: UIViewController) {
+        let vc = RestaurantInfoViewController.makeFromStoryboard()
+        
+        show(from: from, next: vc)
+    }
+    
+    
 }
 
 extension RouterModel {

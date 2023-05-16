@@ -23,6 +23,7 @@ class ConditionalInputViewController: UIViewController {
     // MARK: - 変数
     let viewModel = ConditionalInputViewModel()
     let disposeBag: DisposeBag = DisposeBag()
+    let routerModel: RouterModel = RouterModel()
     // 通信エラー検知用
     private let nWPathMonitorModel: NWPathMonitorModel = NWPathMonitorModel()
     
@@ -100,9 +101,7 @@ class ConditionalInputViewController: UIViewController {
     // 画面展開
     static func makeFromStoryboard() -> ConditionalInputViewController {
         let vc = UIStoryboard.conditionalInputViewController
-        
-        print("ttttttttttttttttttt")
-        
+                
         return vc
     }
     
@@ -172,8 +171,18 @@ class ConditionalInputViewController: UIViewController {
                 print("----------------")
                 print("info: \(info)")
                 
+                
+                
             }
             .disposed(by: disposeBag)
+        
+        output.getResutaurantData
+            .drive { [self] result in
+                
+                if result {
+                    routerModel.showIntuitionSelectViewController(from: self)
+                }
+            }
     }
     
 }

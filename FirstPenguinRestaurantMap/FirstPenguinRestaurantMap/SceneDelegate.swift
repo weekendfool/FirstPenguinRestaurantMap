@@ -21,14 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
                     let window = UIWindow(windowScene: windowScene)
             
-//            RouterModel.showRootConditionalInputView(window: window)
-            window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
+                window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
                     self.window = window
                     window.makeKeyAndVisible()
                 }
                 
         
-        print("FFFFFFFFFFFFFFFFFFFFf")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

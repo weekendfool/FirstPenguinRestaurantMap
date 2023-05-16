@@ -30,6 +30,9 @@
 		8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */; };
 		8C7A6D362A1121B8002BC73C /* APIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D352A1121B8002BC73C /* APIDataModel.swift */; };
 		8CA79CA92A13B5AA00C29CAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */; };
+		8CA79CAB2A13DF7400C29CAC /* RestaurantDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA79CAA2A13DF7400C29CAC /* RestaurantDataModel.swift */; };
+		8CA79CAD2A13E0FD00C29CAC /* ResutaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA79CAC2A13E0FD00C29CAC /* ResutaurantModel.swift */; };
+		8CA79CAF2A14027D00C29CAC /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA79CAE2A14027D00C29CAC /* UserDefaultsExtension.swift */; };
 		8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */; };
 		8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */; };
 		8CB5E85E2A0EC04800C04AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */; };
@@ -87,6 +90,9 @@
 		8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		8C7A6D352A1121B8002BC73C /* APIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataModel.swift; sourceTree = "<group>"; };
 		8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8CA79CAA2A13DF7400C29CAC /* RestaurantDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDataModel.swift; sourceTree = "<group>"; };
+		8CA79CAC2A13E0FD00C29CAC /* ResutaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResutaurantModel.swift; sourceTree = "<group>"; };
+		8CA79CAE2A14027D00C29CAC /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		8CB5E84E2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguinRestaurantMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CB5E85B2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FirstPenguinRestaurantMap.xcdatamodel; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				8C7A6D292A0ECD5D002BC73C /* APIModel.swift */,
 				8C7A6D302A10CC96002BC73C /* RouterModel.swift */,
 				8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */,
+				8CA79CAC2A13E0FD00C29CAC /* ResutaurantModel.swift */,
 				8C7A6D052A0EC95A002BC73C /* DataModel */,
 			);
 			path = Model;
@@ -195,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7A6D352A1121B8002BC73C /* APIDataModel.swift */,
+				8CA79CAA2A13DF7400C29CAC /* RestaurantDataModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -248,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */,
+				8CA79CAE2A14027D00C29CAC /* UserDefaultsExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -282,12 +291,12 @@
 				8C7A6D032A0EC941002BC73C /* View */,
 				8C7A6D022A0EC935002BC73C /* ViewModel */,
 				8CB5E8512A0EC04600C04AF7 /* AppDelegate.swift */,
+				8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */,
 				8C7A6D322A10CCB3002BC73C /* Extension */,
 				8CB5E85D2A0EC04800C04AF7 /* Assets.xcassets */,
 				8CB5E85F2A0EC04800C04AF7 /* LaunchScreen.storyboard */,
 				8CB5E8622A0EC04800C04AF7 /* Info.plist */,
 				8CB5E85A2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld */,
-				8CA79CA82A13B5AA00C29CAC /* SceneDelegate.swift */,
 			);
 			path = FirstPenguinRestaurantMap;
 			sourceTree = "<group>";
@@ -559,8 +568,10 @@
 				8C7A6D362A1121B8002BC73C /* APIDataModel.swift in Sources */,
 				8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */,
 				8C7A6D0E2A0ECAD6002BC73C /* RestaurantInfoViewController.swift in Sources */,
+				8CA79CAD2A13E0FD00C29CAC /* ResutaurantModel.swift in Sources */,
 				8C7A6D1C2A0ECB41002BC73C /* IntuitionSelectViewModel.swift in Sources */,
 				8CB5E8522A0EC04600C04AF7 /* AppDelegate.swift in Sources */,
+				8CA79CAF2A14027D00C29CAC /* UserDefaultsExtension.swift in Sources */,
 				8C7A6D162A0ECB17002BC73C /* CarefullySelectViewModel.swift in Sources */,
 				8C7A6D262A0ECB84002BC73C /* ConditionalInputViewController.swift in Sources */,
 				8CB5E85C2A0EC04600C04AF7 /* FirstPenguinRestaurantMap.xcdatamodeld in Sources */,
@@ -568,6 +579,7 @@
 				8C7A6D142A0ECB0B002BC73C /* CarefullySelectViewController.swift in Sources */,
 				8C7A6D102A0ECAE7002BC73C /* RestaurantInfoViewModel.swift in Sources */,
 				8C7A6D282A0ECB91002BC73C /* ConditionalInputViewModel.swift in Sources */,
+				8CA79CAB2A13DF7400C29CAC /* RestaurantDataModel.swift in Sources */,
 				8CA79CA92A13B5AA00C29CAC /* SceneDelegate.swift in Sources */,
 				8C7A6D2F2A10CB34002BC73C /* NWPathMonitorModel.swift in Sources */,
 				8C7A6D222A0ECB69002BC73C /* MapViewModel.swift in Sources */,
