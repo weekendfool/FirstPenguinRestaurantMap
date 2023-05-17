@@ -9,16 +9,20 @@
 
 import UIKit
 
-func getImageByUrl(url: String) -> UIImage {
+extension UIImage {
     
-    let url = URL(string: url)!
     
-    do {
-        let data = try Data(contentsOf: url)
-        return UIImage(data: data)!
-    } catch let error {
-        print("Error: \(error)")
+    public convenience init(url: String) {
+        let url = URL(string: url)!
+        
+        do {
+            let data = try Data(contentsOf: url)
+            self.init(data: data)!
+        } catch let error {
+            print("Error: \(error)")
+        }
+        self.init()
     }
-    
-    return UIImage()
+
 }
+
