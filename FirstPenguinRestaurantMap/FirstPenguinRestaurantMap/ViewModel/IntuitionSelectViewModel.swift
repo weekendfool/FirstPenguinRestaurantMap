@@ -39,6 +39,10 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         // 通信状況
         let comunnicationState: Driver<networkstate>
         
+        let reloadRestaurantData: Driver<Bool>
+        
+        let getURL: Driver<URL>
+        
         // label
         let firstNumberOfRestaurantsLabel: Driver<String>
         let firstResutaurantNameLabel: Driver<String>
@@ -69,6 +73,13 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             .map { state in
                 return state[0] as! networkstate
             }
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let reloadRestaurantData = input.isMadeStoryboard
+            .map { _ in
+                self.resutaurantModel.reloadResutaurantArray()
+            }
+            .merge()
             .asDriver(onErrorDriveWith: .empty())
         
         // 初期設定
@@ -112,6 +123,12 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
                 self.resutaurantModel.selectData(isSelected: true)
             }
             .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let getURL = firstResutaurantImageView.asObservable()
+            .map { urlString in
+                return URL(string: urlString)!
+            }
             .asDriver(onErrorDriveWith: .empty())
         
         
@@ -178,6 +195,8 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         
         return intuitionSelectViewOutput(
             comunnicationState: comunnicationState,
+            reloadRestaurantData: reloadRestaurantData,
+            getURL: getURL,
             firstNumberOfRestaurantsLabel: firstNumberOfRestaurantsLabel,
             firstResutaurantNameLabel: firstResutaurantNameLabel,
             firstAccessLabel: firstAccessLabel,

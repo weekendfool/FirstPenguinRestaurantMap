@@ -19,5 +19,6 @@ target 'FirstPenguinRestaurantMap' do
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'Alamofire'
+pod 'AlamofireImage'
 
 end

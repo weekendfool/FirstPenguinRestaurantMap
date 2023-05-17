@@ -17,6 +17,7 @@ class RestaurantDataModel: Codable {
     var access: String
     var imageULR: String
     
+    
     init(name: String, lat: Double, lng: Double, access: String, imageULR: String) {
         self.name = name
         self.lat = lat

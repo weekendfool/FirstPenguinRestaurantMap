@@ -11,6 +11,7 @@ import Foundation
 //import RxCocoa
 import RxSwift
 import Alamofire
+import AlamofireImage
 
 final class APIModel {
     
@@ -68,6 +69,14 @@ final class APIModel {
         }
     }
     
+//    func getImage(url: String) -> Observable<UIImage> {
+//        return Observable.create { observable in
+//            
+//            AF.
+//            return Disposables.create()
+//        }
+//    }
+//    
     // 情報の取得
     
     // デコード

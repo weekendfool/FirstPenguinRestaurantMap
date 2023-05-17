@@ -8,6 +8,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AlamofireImage
+import Alamofire
 
 class IntuitionSelectViewController: UIViewController {
     // MARK: - UIパーツ
@@ -26,6 +28,8 @@ class IntuitionSelectViewController: UIViewController {
     // レストランのデータ
     var resutaurantArray: [ResutaurantModel] = []
     
+//    var image = UIImage()
+    
     var viewModel: IntuitionSelectViewModel = IntuitionSelectViewModel()
     var disposeBag: DisposeBag = DisposeBag()
     let routerModel: RouterModel = RouterModel()
@@ -37,9 +41,10 @@ class IntuitionSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        print("¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥")
-        print(resutaurantModel.reloadData())
+        
+        bindViewModel()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +52,14 @@ class IntuitionSelectViewController: UIViewController {
         
         getNetworkState(state: networkstate.successfulCommunication as Any)
 
+//        let url = "https://imgfp.hotp.jp/IMGH/62/62/P037596262/P037596262_168.jpg"
+//        let x = AF.request(url).responseImage { result in
+//
+//            if case .success(let i) = result.result {
+//                self.resutaurantImageView.image = i
+//            }
+////            let image = result.result.get()
+//        }
     }
     
 
@@ -90,6 +103,12 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        output.reloadRestaurantData
+            .drive { result in
+                
+            }
+            .disposed(by: disposeBag)
+        
         // 初期表示
         // 件数の表示
         output.firstNumberOfRestaurantsLabel
@@ -112,10 +131,21 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        output.getURL
+            .drive { [self] url in
+                print("url: \(url)")
+            }
+            .disposed(by: disposeBag)
+        
         //　image
         output.firstResutaurantImageView
-            .drive { [weak self] imageString in
-                self!.resutaurantImageView.image = UIImage.init(url: imageString)
+            .drive { [self] imageString in
+                AF.request(imageString).responseImage { [self] result in
+                    
+                    if case .success(let image) = result.result {
+                        resutaurantImageView.image = image
+                    }
+                }
             }
             .disposed(by: disposeBag)
         
@@ -152,8 +182,13 @@ class IntuitionSelectViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.resutaurantImageViewByBadButton
-            .drive { [weak self] imageString in
-                self!.resutaurantImageView.image = UIImage.init(url: imageString)
+            .drive { [self] imageString in
+                AF.request(imageString).responseImage { [self] result in
+                    
+                    if case .success(let image) = result.result {
+                        resutaurantImageView.image = image
+                    }
+                }
             }
             .disposed(by: disposeBag)
         
@@ -176,8 +211,13 @@ class IntuitionSelectViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.resutaurantImageViewByGoodButton
-            .drive { [weak self] imageString in
-                self!.resutaurantImageView.image = UIImage.init(url: imageString)
+            .drive { [self] imageString in
+                AF.request(imageString).responseImage { [self] result in
+                    
+                    if case .success(let image) = result.result {
+                        resutaurantImageView.image = image
+                    }
+                }
             }
             .disposed(by: disposeBag)
         
