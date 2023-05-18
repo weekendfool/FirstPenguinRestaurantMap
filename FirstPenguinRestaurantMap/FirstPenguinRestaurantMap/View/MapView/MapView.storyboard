@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,9 +16,36 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-1M-pvi">
+                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYT-P2-otT">
+                                <rect key="frame" x="145" y="740" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="KBs-Wt-DxC"/>
+                                    <constraint firstAttribute="height" constant="40" id="n07-Hg-aif"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EYT-P2-otT" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0PX-eZ-2sW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VJ6-1M-pvi" secondAttribute="bottom" id="BsB-VB-fJc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="VJ6-1M-pvi" secondAttribute="trailing" id="Fnh-nR-2Fk"/>
+                            <constraint firstItem="VJ6-1M-pvi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GzG-6w-hgP"/>
+                            <constraint firstItem="VJ6-1M-pvi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="brw-wo-I8g"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="EYT-P2-otT" secondAttribute="bottom" constant="30" id="sMS-rf-Z5X"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="finishedButton" destination="EYT-P2-otT" id="g2I-v6-WS8"/>
+                        <outlet property="mapView" destination="VJ6-1M-pvi" id="4HX-rH-NsQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

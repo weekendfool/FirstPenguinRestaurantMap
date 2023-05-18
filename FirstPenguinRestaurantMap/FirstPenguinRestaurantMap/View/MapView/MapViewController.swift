@@ -10,6 +10,10 @@ import UIKit
 class MapViewController: UIViewController {
     
     // MARK: - UIパーツ
+    
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var finishedButton: UIButton!
+    
     // MARK: - 変数
     // MARK: - ライフサイクル
    
