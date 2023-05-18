@@ -56,12 +56,14 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         let resutaurantNameLabelByBadButton: Driver<String>
         let accessLabelByBadButton: Driver<String>
         let resutaurantImageViewByBadButton: Driver<String>
-        
+        let goMapViewByBadButton: Driver<Bool>
         
         let numberOfRestaurantsLabelByGoodButton: Driver<String>
         let resutaurantNameLabelByGoodButton: Driver<String>
         let accessLabelByGoodButton: Driver<String>
         let resutaurantImageViewByGoodButton: Driver<String>
+        
+        let goMapViewByGoodButton: Driver<Bool>
         
         
     }
@@ -90,37 +92,26 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let firstResutaurantNameLabel = input.isMadeStoryboard
+        let firstResutaurantNameLabel = firstNumberOfRestaurantsLabel.asObservable()
+            .filter { $0 != "0"}
             .map { _ in
                 self.resutaurantModel.fetchStringData(item: .name)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let firstAccessLabel = input.isMadeStoryboard
+        let firstAccessLabel = firstNumberOfRestaurantsLabel.asObservable()
+            .filter { $0 != "0"}
             .map { _ in
                 self.resutaurantModel.fetchStringData(item: .access)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let firstResutaurantImageView = input.isMadeStoryboard
+        let firstResutaurantImageView = firstNumberOfRestaurantsLabel.asObservable()
+            .filter { $0 != "0"}
             .map { _ in
                 self.resutaurantModel.fetchStringData(item: .imageURL)
-            }
-            .merge()
-            .asDriver(onErrorDriveWith: .empty())
-        
-        let changeCounterByBadButton = input.tappedBadButton.asObservable()
-            .map { _ in
-                self.resutaurantModel.selectData(isSelected: false)
-            }
-            .merge()
-            .asDriver(onErrorDriveWith: .empty())
-        
-        let changeCounterByGoodButton = input.tappedGoodButton.asObservable()
-            .map { _ in
-                self.resutaurantModel.selectData(isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
@@ -130,6 +121,18 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
                 return URL(string: urlString)!
             }
             .asDriver(onErrorDriveWith: .empty())
+        
+        
+        // 二件目以降：by BadButton
+        let changeCounterByBadButton = input.tappedBadButton.asObservable()
+            .map { _ in
+                self.resutaurantModel.selectData(isSelected: false)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        
+        
         
         
         // 表示
@@ -162,6 +165,21 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
+        let goMapViewByBadButton = numberOfRestaurantsLabelByBadButton.asObservable()
+            .filter { $0 == "0"}
+            .map { _ in
+                return true
+            }
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let changeCounterByGoodButton = input.tappedGoodButton.asObservable()
+            .map { _ in
+                self.resutaurantModel.selectData(isSelected: true)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        
         let numberOfRestaurantsLabelByGoodButton = changeCounterByGoodButton.asObservable()
             .map { _ in
                 self.resutaurantModel.fetchStringData(item: .numberOfRestaurants)
@@ -190,6 +208,13 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
+        let goMapViewByGoodButton = numberOfRestaurantsLabelByGoodButton.asObservable()
+            .filter { $0 == "0"}
+            .map { _ in
+                return true
+            }
+            .asDriver(onErrorDriveWith: .empty())
+        
         
         
         
@@ -208,11 +233,13 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             resutaurantNameLabelByBadButton: resutaurantNameLabelByBadButton,
             accessLabelByBadButton: accessLabelByBadButton,
             resutaurantImageViewByBadButton: resutaurantImageViewByBadButton,
+            goMapViewByBadButton: goMapViewByBadButton,
             numberOfRestaurantsLabelByGoodButton: numberOfRestaurantsLabelByGoodButton,
             
             resutaurantNameLabelByGoodButton: resutaurantNameLabelByGoodButton,
             accessLabelByGoodButton: accessLabelByGoodButton,
-            resutaurantImageViewByGoodButton: resutaurantImageViewByGoodButton
+            resutaurantImageViewByGoodButton: resutaurantImageViewByGoodButton,
+            goMapViewByGoodButton: goMapViewByGoodButton
         )
     }
 }

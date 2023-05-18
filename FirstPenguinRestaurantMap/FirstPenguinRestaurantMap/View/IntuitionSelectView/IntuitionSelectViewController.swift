@@ -44,23 +44,18 @@ class IntuitionSelectViewController: UIViewController {
         
         bindViewModel()
         
-        
+        setupUI()
+
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         getNetworkState(state: networkstate.successfulCommunication as Any)
-
-//        let url = "https://imgfp.hotp.jp/IMGH/62/62/P037596262/P037596262_168.jpg"
-//        let x = AF.request(url).responseImage { result in
-//
-//            if case .success(let i) = result.result {
-//                self.resutaurantImageView.image = i
-//            }
-////            let image = result.result.get()
-//        }
     }
+    
+   
     
 
     // MARK: - 関数
@@ -80,6 +75,20 @@ class IntuitionSelectViewController: UIViewController {
          nWPathMonitorModel.start()
     }
     
+    // ui設定
+    func setupUI() {
+        resutaurantNameLabel.sizeToFit()
+        accessLabel.sizeToFit()
+    }
+    
+    private func setImage(url: String) {
+        AF.request(url).responseImage { [self] result in
+            
+            if case .success(let image) = result.result {
+                resutaurantImageView.image = image
+            }
+        }
+    }
     
     // 紐付け
     func bindViewModel() {
@@ -128,6 +137,7 @@ class IntuitionSelectViewController: UIViewController {
         output.firstAccessLabel
             .drive { [weak self] access in
                 self?.accessLabel.text = access
+//                self?.accessLabel.sizeToFit()
             }
             .disposed(by: disposeBag)
         
@@ -140,12 +150,7 @@ class IntuitionSelectViewController: UIViewController {
         //　image
         output.firstResutaurantImageView
             .drive { [self] imageString in
-                AF.request(imageString).responseImage { [self] result in
-                    
-                    if case .success(let image) = result.result {
-                        resutaurantImageView.image = image
-                    }
-                }
+               setImage(url: imageString)
             }
             .disposed(by: disposeBag)
         
@@ -183,12 +188,13 @@ class IntuitionSelectViewController: UIViewController {
         
         output.resutaurantImageViewByBadButton
             .drive { [self] imageString in
-                AF.request(imageString).responseImage { [self] result in
-                    
-                    if case .success(let image) = result.result {
-                        resutaurantImageView.image = image
-                    }
-                }
+                setImage(url: imageString)
+            }
+            .disposed(by: disposeBag)
+        
+        output.goMapViewByBadButton
+            .drive { [self] restut in
+                routerModel.showMapViewController(from: self)
             }
             .disposed(by: disposeBag)
         
@@ -212,12 +218,13 @@ class IntuitionSelectViewController: UIViewController {
         
         output.resutaurantImageViewByGoodButton
             .drive { [self] imageString in
-                AF.request(imageString).responseImage { [self] result in
-                    
-                    if case .success(let image) = result.result {
-                        resutaurantImageView.image = image
-                    }
-                }
+                setImage(url: imageString)
+            }
+            .disposed(by: disposeBag)
+        
+        output.goMapViewByGoodButton
+            .drive { [self] restut in
+                routerModel.showMapViewController(from: self)
             }
             .disposed(by: disposeBag)
         
