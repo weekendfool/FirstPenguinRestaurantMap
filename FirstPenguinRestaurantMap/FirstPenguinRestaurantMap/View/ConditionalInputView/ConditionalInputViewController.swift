@@ -28,6 +28,7 @@ class ConditionalInputViewController: UIViewController {
     private let nWPathMonitorModel: NWPathMonitorModel = NWPathMonitorModel()
     
     var userLocation = MKUserLocation()
+    var locationManager = CLLocationManager()
     
     //　緯度経度取得用
     var userLat = "" {
@@ -48,42 +49,8 @@ class ConditionalInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView?.mapType = .standard
-        
-        let locationManager = CLLocationManager()
-        CLLocationManager.locationServicesEnabled()
-        
-//        locationManager.delegate = self
-        mapView.delegate = self
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == CLAuthorizationStatus.notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-//            locationManager.startUpdatingLocation()
-           
-        }
-        
-        
-        
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
-        print("userLocation: \(userLocation)")
-//        userLat = String(userLocation.coordinate.latitude)
-//        userLng = String(userLocation.coordinate.longitude)
-        
-        
-//        locationManager.requestLocation()
-        
-        // 祝作
-        var ragion = mapView.region
-        
-//        ragion.center = userLocation
-        ragion.span.latitudeDelta = 0.02
-        ragion.span.longitudeDelta = 0.02
-        
-        mapView.setRegion(ragion, animated: true)
-
+       
+        setupUserLocation()
         // viewmodelとの紐付け
         bindViewModel()
     }
@@ -93,6 +60,12 @@ class ConditionalInputViewController: UIViewController {
         
         getNetworkState(state: networkstate.successfulCommunication as Any)
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        locationManager.stopUpdatingLocation()
     }
     
 
@@ -106,7 +79,7 @@ class ConditionalInputViewController: UIViewController {
     }
     
     // 通信のセットアップ
-    func setupMonitorComunnication() {
+    private func setupMonitorComunnication() {
         nWPathMonitorModel.monitorComunnication { state  in
              self.getNetworkState(state: state as Any)
          }
@@ -114,12 +87,44 @@ class ConditionalInputViewController: UIViewController {
          nWPathMonitorModel.start()
     }
     
+    // 位置情報のセットアップ
+    private func setupUserLocation() {
+        mapView?.mapType = .standard
+        
+        locationManager = CLLocationManager()
+        CLLocationManager.locationServicesEnabled()
+        
+//        locationManager.delegate = self
+        mapView.delegate = self
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == CLAuthorizationStatus.notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+           
+        }
+
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        print("userLocation: \(userLocation)")
+
+        // 縮尺
+        var ragion = mapView.region
+        
+        ragion.span.latitudeDelta = 0.02
+        ragion.span.longitudeDelta = 0.02
+        
+        mapView.setRegion(ragion, animated: true)
+    }
+    
     // 紐付け
-    func bindViewModel() {
+    private func bindViewModel() {
         let isMadeStoryboard = rx.methodInvoked(#selector(viewWillAppear(_:)))
         let comunnicationState = rx.methodInvoked(#selector(getNetworkState))
         let myLat = rx.methodInvoked(#selector(changeLat))
         let myLng = rx.methodInvoked(#selector(changeLng))
+        
+        
         
         let input = ConditionalInputViewModel.viewModelInput(
             isMadeStoryboard: isMadeStoryboard,

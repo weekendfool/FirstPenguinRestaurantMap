@@ -21,14 +21,10 @@ class IntuitionSelectViewController: UIViewController {
     @IBOutlet weak var badButton: UIButton!
     @IBOutlet weak var goodButton: UIButton!
     @IBOutlet weak var goMapViewButton: UIButton!
+    @IBOutlet weak var resutaurantInfoView: UIView!
     
     // MARK: - 変数
-    
-    let resutaurantModel = ResutaurantModel()
-    // レストランのデータ
-    var resutaurantArray: [ResutaurantModel] = []
-    
-//    var image = UIImage()
+
     
     var viewModel: IntuitionSelectViewModel = IntuitionSelectViewModel()
     var disposeBag: DisposeBag = DisposeBag()
@@ -77,8 +73,17 @@ class IntuitionSelectViewController: UIViewController {
     
     // ui設定
     func setupUI() {
+        
+        // ラベルの設定
         resutaurantNameLabel.sizeToFit()
         accessLabel.sizeToFit()
+        
+        // ジェスチャーの設定
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedResutaurantInfoView))
+        
+        resutaurantInfoView.addGestureRecognizer(tapGesture)
+        
+        
     }
     
     private func setImage(url: String) {
@@ -94,12 +99,15 @@ class IntuitionSelectViewController: UIViewController {
     func bindViewModel() {
         let isMadeStoryboard = rx.methodInvoked(#selector(viewWillAppear(_:)))
         let comunnicationState = rx.methodInvoked(#selector(getNetworkState))
+        let tappedResutaurantInfoView = rx.methodInvoked(#selector(tappedResutaurantInfoView))
+        
         
         let input = IntuitionSelectViewModel.intuitionSelectViewInput(
             isMadeStoryboard: isMadeStoryboard,
             comunnicationState: comunnicationState,
             tappedBadButton: badButton.rx.tap.asSignal(),
             tappedGoodButton: goodButton.rx.tap.asSignal(),
+            tappedResutaurantInfoView: tappedResutaurantInfoView,
             goMapView: goMapViewButton.rx.tap.asSignal()
         )
         
@@ -223,8 +231,14 @@ class IntuitionSelectViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.goMapViewByGoodButton
-            .drive { [self] restut in
+            .drive { [self] result in
                 routerModel.showMapViewController(from: self)
+            }
+            .disposed(by: disposeBag)
+        
+        output.goRestaurantInfoView
+            .drive { [self] result in
+                routerModel.showRestaurantInfoViewController(from: self)
             }
             .disposed(by: disposeBag)
         
@@ -238,5 +252,11 @@ class IntuitionSelectViewController: UIViewController {
 extension IntuitionSelectViewController {
     @objc func getNetworkState(state: Any) {
         // 登録する
+    }
+}
+
+extension IntuitionSelectViewController {
+    @objc func tappedResutaurantInfoView() {
+        print("tapされたよ")
     }
 }

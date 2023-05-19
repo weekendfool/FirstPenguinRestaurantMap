@@ -112,6 +112,7 @@
                         <outlet property="goodButton" destination="CU9-ni-hX1" id="hTB-rL-Kwq"/>
                         <outlet property="numberOfRestaurantsLabel" destination="dKc-Pa-4hc" id="wlr-E1-SXS"/>
                         <outlet property="resutaurantImageView" destination="OoT-e2-TZy" id="alP-yX-988"/>
+                        <outlet property="resutaurantInfoView" destination="bMe-Ez-qv0" id="6HQ-rJ-boQ"/>
                         <outlet property="resutaurantNameLabel" destination="Wf8-Lq-uyi" id="5rC-l4-wrE"/>
                     </connections>
                 </viewController>
