@@ -15,13 +15,79 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="住所" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS0-dc-bC6">
+                                <rect key="frame" x="30" y="117.33333333333333" width="330" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="営業時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUs-l7-bO7">
+                                <rect key="frame" x="30" y="157.66666666666666" width="330" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="クレジット" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ5-h2-kA9">
+                                <rect key="frame" x="30" y="198" width="330" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flX-OS-opJ">
+                                <rect key="frame" x="30" y="238.33333333333334" width="330" height="461.66666666666663"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0N-PR-a2z">
+                                <rect key="frame" x="30" y="740" width="330" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6aC-Tz-gjS"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7A-LN-gPV">
+                                <rect key="frame" x="30" y="77" width="330" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="p7A-LN-gPV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="5jH-xS-L8y"/>
+                            <constraint firstItem="flX-OS-opJ" firstAttribute="top" secondItem="xJ5-h2-kA9" secondAttribute="bottom" constant="20" id="MWh-sr-Xow"/>
+                            <constraint firstItem="bUs-l7-bO7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Oof-Mb-hai"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xJ5-h2-kA9" secondAttribute="trailing" constant="30" id="P4j-bB-MAW"/>
+                            <constraint firstItem="gS0-dc-bC6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="R3g-L3-Vdl"/>
+                            <constraint firstItem="gS0-dc-bC6" firstAttribute="top" secondItem="p7A-LN-gPV" secondAttribute="bottom" constant="20" id="RDq-dN-m1m"/>
+                            <constraint firstItem="xJ5-h2-kA9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="SQ2-P8-6Cf"/>
+                            <constraint firstItem="xJ5-h2-kA9" firstAttribute="top" secondItem="bUs-l7-bO7" secondAttribute="bottom" constant="20" id="WuX-Jy-8fR"/>
+                            <constraint firstItem="bUs-l7-bO7" firstAttribute="top" secondItem="gS0-dc-bC6" secondAttribute="bottom" constant="20" id="Xjx-Ic-cMv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="p7A-LN-gPV" secondAttribute="trailing" constant="30" id="ZD1-7J-vcz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="flX-OS-opJ" secondAttribute="trailing" constant="30" id="cTw-wj-rkG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="A0N-PR-a2z" secondAttribute="bottom" constant="30" id="dBm-4y-ccB"/>
+                            <constraint firstItem="flX-OS-opJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="hSp-Gi-0gb"/>
+                            <constraint firstItem="A0N-PR-a2z" firstAttribute="top" secondItem="flX-OS-opJ" secondAttribute="bottom" constant="40" id="hhV-u7-1I6"/>
+                            <constraint firstItem="A0N-PR-a2z" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="l4g-uF-mwT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bUs-l7-bO7" secondAttribute="trailing" constant="30" id="m6l-JY-6Zz"/>
+                            <constraint firstItem="p7A-LN-gPV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="tye-Z0-jV5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gS0-dc-bC6" secondAttribute="trailing" constant="30" id="xQJ-aP-ZUf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="A0N-PR-a2z" secondAttribute="trailing" constant="30" id="z9N-tN-Xvu"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="creditCardLabel" destination="xJ5-h2-kA9" id="xyR-5E-xjp"/>
+                        <outlet property="goMapButton" destination="A0N-PR-a2z" id="xub-Q0-pAD"/>
+                        <outlet property="resutaurantAdressLabel" destination="gS0-dc-bC6" id="DUa-mc-IIf"/>
+                        <outlet property="resutaurantBusinessHours" destination="bUs-l7-bO7" id="0Mq-so-Or3"/>
+                        <outlet property="resutaurantImageView" destination="flX-OS-opJ" id="DP5-Ic-yAK"/>
+                        <outlet property="resutaurantNameLabel" destination="p7A-LN-gPV" id="qgY-7s-8mY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="-2"/>
+            <point key="canvasLocation" x="56.92307692307692" y="-2.1327014218009479"/>
         </scene>
     </scenes>
     <resources>

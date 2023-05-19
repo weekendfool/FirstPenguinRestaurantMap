@@ -9,6 +9,17 @@ import UIKit
 
 class RestaurantInfoViewController: UIViewController {
     // MARK: - UIパーツ
+    
+    @IBOutlet weak var resutaurantNameLabel: UILabel!
+    @IBOutlet weak var resutaurantAdressLabel: UILabel!
+    @IBOutlet weak var resutaurantBusinessHours: UILabel!
+    
+    @IBOutlet weak var creditCardLabel: UILabel!
+    
+    @IBOutlet weak var resutaurantImageView: UIImageView!
+    
+    
+    @IBOutlet weak var goMapButton: UIButton!
     // MARK: - 変数
     // MARK: - ライフサイクル
     
