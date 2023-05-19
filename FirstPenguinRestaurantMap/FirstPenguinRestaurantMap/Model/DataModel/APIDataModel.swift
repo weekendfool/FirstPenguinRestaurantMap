@@ -28,6 +28,10 @@ struct shop: Codable {
     var lng: Double
     // アクセス
     var mobile_access: String
+    
+    var address: String
+    var open: String
+    var card: String
     // 写真
     var photo: photo
 }

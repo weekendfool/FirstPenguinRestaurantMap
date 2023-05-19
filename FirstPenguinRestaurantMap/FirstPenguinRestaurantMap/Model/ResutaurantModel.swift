@@ -211,3 +211,10 @@ extension item {
         }
     }
 }
+
+
+enum creidtCardState {
+    case exist
+    case notExist
+    case notClear
+}
