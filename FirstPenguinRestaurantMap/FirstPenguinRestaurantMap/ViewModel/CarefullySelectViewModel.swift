@@ -32,7 +32,7 @@ extension CarefullySelectViewModel: CarefullySelectViewModelType {
         // 電波の状況
         let comunnicationState: Observable<[Any]>
         // 画面遷移
-        let goMapView: Signal<Void>
+        let goMapView: Observable<[Any]>
     }
     
     struct carefullySelectViewOutput {
@@ -68,6 +68,7 @@ extension CarefullySelectViewModel: CarefullySelectViewModelType {
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
+        
         
         let goMapView = input.goMapView.asObservable()
             .map { _ in
