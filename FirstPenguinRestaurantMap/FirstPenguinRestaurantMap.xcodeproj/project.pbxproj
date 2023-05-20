@@ -185,7 +185,6 @@
 				8C7A6D082A0EC9B6002BC73C /* IntuitionSelectView */,
 				8C7A6D072A0EC999002BC73C /* MapView */,
 				8C7A6D062A0EC967002BC73C /* ConditionalInputView */,
-				8CA79CB22A18019400C29CAC /* RestaurantInfoTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -244,6 +243,7 @@
 			children = (
 				8C7A6D112A0ECAFD002BC73C /* CarefullySelectView.storyboard */,
 				8C7A6D132A0ECB0B002BC73C /* CarefullySelectViewController.swift */,
+				8CA79CB42A189C6200C29CAC /* tableViewCell */,
 			);
 			path = CarefullySelectView;
 			sourceTree = "<group>";
@@ -265,6 +265,14 @@
 				8CA79CB02A153D0200C29CAC /* UIImageExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8CA79CB42A189C6200C29CAC /* tableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8CA79CB22A18019400C29CAC /* RestaurantInfoTableViewCell.swift */,
+			);
+			path = tableViewCell;
 			sourceTree = "<group>";
 		};
 		8CB5E8452A0EC04600C04AF7 = {

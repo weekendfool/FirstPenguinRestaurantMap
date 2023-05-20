@@ -16,13 +16,20 @@ class RestaurantDataModel: Codable {
     var lng: Double
     var access: String
     var imageULR: String
+    var adress: String
+    var businessHours: String
+    var creditCard: String
+//    var creditCard: creidtCardState = .notClear
     
     
-    init(name: String, lat: Double, lng: Double, access: String, imageULR: String) {
+    init(name: String, lat: Double, lng: Double, access: String, imageULR: String, adress: String, businessHours: String, creditCard: String) {
         self.name = name
         self.lat = lat
         self.lng = lng
         self.access = access
         self.imageULR = imageULR
+        self.adress = adress
+        self.businessHours = businessHours
+        self.creditCard = creditCard
     }
 }
