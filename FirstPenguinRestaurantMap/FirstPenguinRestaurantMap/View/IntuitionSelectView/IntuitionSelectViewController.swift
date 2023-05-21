@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import AlamofireImage
 import Alamofire
+import EMTNeumorphicView
 
 class IntuitionSelectViewController: UIViewController {
     // MARK: - UIパーツ
@@ -18,10 +19,10 @@ class IntuitionSelectViewController: UIViewController {
     @IBOutlet weak var resutaurantNameLabel: UILabel!
     @IBOutlet weak var accessLabel: UILabel!
     @IBOutlet weak var resutaurantImageView: UIImageView!
-    @IBOutlet weak var badButton: UIButton!
-    @IBOutlet weak var goodButton: UIButton!
-    @IBOutlet weak var goMapViewButton: UIButton!
-    @IBOutlet weak var resutaurantInfoView: UIView!
+    @IBOutlet weak var badButton: EMTNeumorphicButton!
+    @IBOutlet weak var goodButton: EMTNeumorphicButton!
+    @IBOutlet weak var goMapViewButton: EMTNeumorphicButton!
+    @IBOutlet weak var resutaurantInfoView: EMTNeumorphicView!
     
     // MARK: - 変数
 
@@ -80,9 +81,32 @@ class IntuitionSelectViewController: UIViewController {
         
         // ジェスチャーの設定
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedResutaurantInfoView))
-        
         resutaurantInfoView.addGestureRecognizer(tapGesture)
         
+        // EMTNeumorphicViewの設定
+        // badButton
+        badButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        badButton.neumorphicLayer?.cornerRadius = 24
+        badButton.neumorphicLayer?.depthType = .convex
+        badButton.neumorphicLayer?.elementDepth = 7
+        
+        // goodButton
+        goodButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goodButton.neumorphicLayer?.cornerRadius = 24
+        goodButton.neumorphicLayer?.depthType = .convex
+        goodButton.neumorphicLayer?.elementDepth = 7
+        
+        // goMapViewButton
+        goMapViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goMapViewButton.neumorphicLayer?.cornerRadius = 24
+        goMapViewButton.neumorphicLayer?.depthType = .convex
+        goMapViewButton.neumorphicLayer?.elementDepth = 7
+       
+       // resutaurantInfoView
+        resutaurantInfoView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        resutaurantInfoView.neumorphicLayer?.cornerRadius = 24
+        resutaurantInfoView.neumorphicLayer?.depthType = .convex
+        resutaurantInfoView.neumorphicLayer?.elementDepth = 7
         
     }
     
@@ -108,7 +132,7 @@ class IntuitionSelectViewController: UIViewController {
             tappedBadButton: badButton.rx.tap.asSignal(),
             tappedGoodButton: goodButton.rx.tap.asSignal(),
             tappedResutaurantInfoView: tappedResutaurantInfoView,
-            goMapView: goMapViewButton.rx.tap.asSignal()
+            tappedGoMapViewButton: goMapViewButton.rx.tap.asSignal()
         )
         
         let output = viewModel.transform(input: input)
@@ -149,7 +173,7 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.getURL
+        output.gatImageUrl
             .drive { [self] url in
                 print("url: \(url)")
             }

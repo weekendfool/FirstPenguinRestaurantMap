@@ -35,7 +35,7 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         let tappedResutaurantInfoView: Observable<[Any]>
         
         // 画面遷移
-        let goMapView: Signal<Void>
+        let tappedGoMapViewButton: Signal<Void>
     }
     
     struct intuitionSelectViewOutput {
@@ -44,7 +44,7 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         
         let reloadRestaurantData: Driver<Bool>
         
-        let getURL: Driver<URL>
+        let gatImageUrl: Driver<URL>
         
         // label
         let firstNumberOfRestaurantsLabel: Driver<String>
@@ -67,7 +67,6 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         let resutaurantImageViewByGoodButton: Driver<String>
         
         let goMapViewByGoodButton: Driver<Bool>
-        
         let goRestaurantInfoView: Driver<Bool>
         
         
@@ -121,7 +120,7 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let getURL = firstResutaurantImageView.asObservable()
+        let gatImageUrl = firstResutaurantImageView.asObservable()
             .map { urlString in
                 return URL(string: urlString)!
             }
@@ -239,7 +238,7 @@ extension IntuitionSelectViewModel: IntuitionSelectViewModelType {
         return intuitionSelectViewOutput(
             comunnicationState: comunnicationState,
             reloadRestaurantData: reloadRestaurantData,
-            getURL: getURL,
+            gatImageUrl: gatImageUrl,
             firstNumberOfRestaurantsLabel: firstNumberOfRestaurantsLabel,
             firstResutaurantNameLabel: firstResutaurantNameLabel,
             firstAccessLabel: firstAccessLabel,
