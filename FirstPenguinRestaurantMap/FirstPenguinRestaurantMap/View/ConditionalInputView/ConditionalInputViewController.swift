@@ -10,16 +10,19 @@ import MapKit
 import RxSwift
 import RxCocoa
 import CoreLocation
+import EMTNeumorphicView
 
 class ConditionalInputViewController: UIViewController {
     
     // MARK: - UIパーツ
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var distanceSlider: UISlider!
-    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var goCarefullySelectViewButton: EMTNeumorphicButton!
+    @IBOutlet weak var mapBaseView: EMTNeumorphicView!
+    @IBOutlet weak var goIntuitionSelectViewButton: EMTNeumorphicButton!
+    @IBOutlet weak var distanceSegumentedControl: UISegmentedControl!
     
+    @IBOutlet weak var sefumentedControlBaseView: EMTNeumorphicView!
     // MARK: - 変数
     let viewModel = ConditionalInputViewModel()
     let disposeBag: DisposeBag = DisposeBag()
@@ -65,7 +68,8 @@ class ConditionalInputViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        locationManager.stopUpdatingLocation()
+            self.locationManager.stopUpdatingLocation()
+       
     }
     
 
@@ -87,34 +91,67 @@ class ConditionalInputViewController: UIViewController {
          nWPathMonitorModel.start()
     }
     
+    // UI設定
+    private func setupUI() {
+        
+        // goCarefullySelectViewButton
+        goCarefullySelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goCarefullySelectViewButton.neumorphicLayer?.cornerRadius = 24
+        goCarefullySelectViewButton.neumorphicLayer?.depthType = .convex
+        goCarefullySelectViewButton.neumorphicLayer?.elementDepth = 7
+        
+         // goIntuitionSelectViewButton
+        goIntuitionSelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goIntuitionSelectViewButton.neumorphicLayer?.cornerRadius = 24
+        goIntuitionSelectViewButton.neumorphicLayer?.depthType = .convex
+        goIntuitionSelectViewButton.neumorphicLayer?.elementDepth = 7
+        
+        // mapBaseView
+        mapBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        mapBaseView.neumorphicLayer?.cornerRadius = 24
+        mapBaseView.neumorphicLayer?.depthType = .convex
+        mapBaseView.neumorphicLayer?.elementDepth = 7
+        
+        // sefumentedControlBaseView
+        sefumentedControlBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        sefumentedControlBaseView.neumorphicLayer?.cornerRadius = 24
+        sefumentedControlBaseView.neumorphicLayer?.depthType = .convex
+        sefumentedControlBaseView.neumorphicLayer?.elementDepth = 7
+        
+    }
+    
     // 位置情報のセットアップ
     private func setupUserLocation() {
-        mapView?.mapType = .standard
         
-        locationManager = CLLocationManager()
-        CLLocationManager.locationServicesEnabled()
-        
-//        locationManager.delegate = self
-        mapView.delegate = self
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == CLAuthorizationStatus.notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-           
-        }
+            
+            mapView?.mapType = .standard
+            
+            locationManager = CLLocationManager()
+            
+            CLLocationManager.locationServicesEnabled()
+            
+            mapView.delegate = self
+            
+            let status = CLLocationManager.authorizationStatus()
+            
+            if status == CLAuthorizationStatus.notDetermined {
+                locationManager.requestWhenInUseAuthorization()
+               
+            }
+            mapView.showsUserLocation = true
+            mapView.userTrackingMode = .follow
+            
+            print("userLocation: \(userLocation)")
 
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
-        print("userLocation: \(userLocation)")
-
-        // 縮尺
-        var ragion = mapView.region
-        
-        ragion.span.latitudeDelta = 0.02
-        ragion.span.longitudeDelta = 0.02
-        
-        mapView.setRegion(ragion, animated: true)
+            // 縮尺
+            var ragion = mapView.region
+            
+            ragion.span.latitudeDelta = 0.02
+            ragion.span.longitudeDelta = 0.02
+            
+            mapView.setRegion(ragion, animated: true)
+       
+       
     }
     
     // 紐付け
@@ -125,12 +162,13 @@ class ConditionalInputViewController: UIViewController {
         let myLng = rx.methodInvoked(#selector(changeLng))
         
         
-        
-        let input = ConditionalInputViewModel.viewModelInput(
+        let x = distanceSegumentedControl.rx.numberOfSegments.asObserver()
+        let input = ConditionalInputViewModel.conditionalInputViewInput(
             isMadeStoryboard: isMadeStoryboard,
             myLat: myLat,
             myLng: myLng,
-            tappedSearchButton: searchButton.rx.tap.asSignal(),
+            selectedRange: distanceSegumentedControl.rx.numberOfSegments.asObserver()
+            tappedGoCarefullySelectViewButton: goCarefullySelectViewButton.rx.tap.asSignal(), tappedGoIntuitionSelectViewButton: goIntuitionSelectViewButton.rx.tap.asSignal(),
             comunnicationState: comunnicationState
         )
         
@@ -143,25 +181,33 @@ class ConditionalInputViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        // 位置情報
         output.lat
             .drive { lat in
-                print("lat: \(lat)")
             }
             .disposed(by: disposeBag)
         
         output.lng
             .drive { lng in
-                print("lng: \(lng)")
             }
             .disposed(by: disposeBag)
         
-        output.distance
-            .drive { distance in
-                print("distance: \(distance)")
+        output.myPosition
+            .drive { position in
+                print("position: \(position)")
             }
             .disposed(by: disposeBag)
         
-        output.getData
+        // 検索条件
+        output.searchingRange
+            .drive { range in
+                print("range: \(range)")
+            }
+            .disposed(by: disposeBag)
+        
+        // api通信
+        
+        output.fetchApiDataByGoCarefullySelectViewButton
             .drive { data in
                 print("----------------")
 //                self.locationManager.requestWhenInUseAuthorization()
@@ -170,22 +216,51 @@ class ConditionalInputViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        // 画面遷移
-        output.goIntuitionSelectView
-            .drive { [self] info in
-                print("----------------")
-                print("info: \(info)")
-                
-                
+        output.fetchApiDataByGoIntuitionSelectViewButton
+            .drive { data in
+
+            }
+            .disposed(by: disposeBag)
+        
+        // デコード
+        output.decodingApiDataByGoCarefullySelectViewButton
+            .drive { reuslt in
                 
             }
             .disposed(by: disposeBag)
         
-        output.getResutaurantData
+        output.decodingApiDataByGoIntuitionSelectViewButton
+            .drive { reuslt in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        // レストランの情報
+        output.setResutaurantDataByGoCarefullySelectViewButton
+            .drive { reuslt in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.setResutaurantDataByGoIntuitionSelectViewButton
+            .drive { reuslt in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        
+        // 画面遷移
+        output.goIntuitionSelectView
+            .drive { [self] result in
+                routerModel.showIntuitionSelectViewController(from: self)
+            }
+            .disposed(by: disposeBag)
+        
+        output.goCarefullySelectView
             .drive { [self] result in
                 
                 if result {
-                    routerModel.showIntuitionSelectViewController(from: self)
+                    routerModel.showCarefullySelectViewController(from: self)
                 }
             }
     }

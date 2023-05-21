@@ -45,8 +45,8 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
         let resutaurantName: Driver<String>
         let resutaurantAdress: Driver<String>
         let resutaurantBusinessHours: Driver<String>
-        let creditCardLabel: Driver<creidtCardState>
-        let resutaurantImageView: Driver<String>
+        let creditCard: Driver<String>
+        let resutaurantImageUrlString: Driver<String>
         
         let goMapView: Driver<Bool>
         
@@ -92,7 +92,7 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
          
-        let creditCardLabel = reloadRestaurantData.asObservable()
+        let creditCard = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
                 self.resutaurantModel.fetchStringData(item: .creditCard)
@@ -100,7 +100,7 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let resutaurantImageView = reloadRestaurantData.asObservable()
+        let resutaurantImageUrlString = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
                 self.resutaurantModel.fetchStringData(item: .imageURL)
@@ -121,8 +121,8 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
             resutaurantName: resutaurantName,
             resutaurantAdress: resutaurantAdress,
             resutaurantBusinessHours: resutaurantBusinessHours,
-            creditCardLabel: creditCardLabel,
-            resutaurantImageView: resutaurantImageView,
+            creditCard: creditCard,
+            resutaurantImageUrlString: resutaurantImageUrlString,
             goMapView: goMapView
         )
     }

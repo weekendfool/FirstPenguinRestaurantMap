@@ -11,10 +11,10 @@ import RxSwift
 
 
 protocol ConditionalInputViewModelType {
-    associatedtype viewModelInput
-    associatedtype viewModelOutput
+    associatedtype conditionalInputViewInput
+    associatedtype conditionalInputViewOutput
     
-    func transform(input: viewModelInput) -> viewModelOutput
+    func transform(input: conditionalInputViewInput) -> conditionalInputViewOutput
 }
 
 
@@ -28,45 +28,57 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
    
     
     
-    struct viewModelInput {
+    struct conditionalInputViewInput {
         // 画面の展開
         let isMadeStoryboard: Observable<[Any]>
-        // スライダー
-//        let inputDistanceSlider: Observable<Float>
-        
-        // 自分の位置
-//        let myPosition: Observable<>
+ 
         
         let myLat: Observable<[Any]>
         let myLng: Observable<[Any]>
+        
+        let selectedRange: Observable<Int>
+        
         // button
-        let tappedSearchButton: Signal<Void>
+        let tappedGoCarefullySelectViewButton: Signal<Void>
+        let tappedGoIntuitionSelectViewButton: Signal<Void>
         // mapView
-//        let inputMapView: Signal<Void>
         
         // 電波の状況
         let comunnicationState: Observable<[Any]>
     }
     
-    struct viewModelOutput {
+    struct conditionalInputViewOutput {
         // 通信状況
         let comunnicationState: Driver<networkstate>
         
-        let getData: Driver<Data?>
+        // APIData
+//        let fetchApi: Driver<Data?>
         // 距離
         let lat: Driver<String>
         let lng: Driver<String>
+        let myPosition: Driver<(latString: String, lngString: String)>
         
-        let distance: Driver<(latString: String, lngString: String)>
-        // 画面遷移
-        let goIntuitionSelectView: Driver<APIDataModel>
+        // 検索範囲
+        let searchingRange: Driver<range>
+       
+        // API通信
+        let fetchApiDataByGoCarefullySelectViewButton: Driver<Data?>
+        let fetchApiDataByGoIntuitionSelectViewButton: Driver<Data?>
         
         // 情報の整理
-        let getResutaurantData: Driver<Bool>
+        let decodingApiDataByGoCarefullySelectViewButton: Driver<APIDataModel>
+        let decodingApiDataByGoIntuitionSelectViewButton: Driver<APIDataModel>
+        
+        let setResutaurantDataByGoCarefullySelectViewButton: Driver<Bool>
+        let setResutaurantDataByGoIntuitionSelectViewButton: Driver<Bool>
+        
+        
+        let goIntuitionSelectView: Driver<Bool>
+        let goCarefullySelectView: Driver<Bool>
     }
     
     
-    func transform(input: viewModelInput) -> viewModelOutput {
+    func transform(input: conditionalInputViewInput) -> conditionalInputViewOutput {
         
         // 通信状況
         let comunnicationState = input.comunnicationState
@@ -75,15 +87,27 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             }
             .asDriver(onErrorDriveWith: .empty())
         
-//        let getData = input.tappedSearchButton.asObservable()
-//            .withLatestFrom(input.myPosition) { tapped, distance  in
-//                self.apiModel.getData(lat: String(distance.), lng: String(distance), range: .first)
-//            }
-//            .merge()
-//            .asDriver(onErrorDriveWith: .empty())
+        let searchingRange = input.selectedRange.asObservable()
+            .map { inputRange in
+                switch inputRange {
+                case 1:
+                    return range.first
+                case 2:
+                    return range.second
+                case 3:
+                    return range.third
+                case 4:
+                    return range.fourth
+                case 5:
+                    return range.fifth
+                default:
+                    return range.third
+                }
+            }
+            .asDriver(onErrorDriveWith: .empty())
         
        
-        
+        // 位置情報
         let lat = input.myLat.asObservable()
             .map { lat in
                 return lat.first as! String
@@ -97,20 +121,23 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         
-        let distance = Driver.combineLatest(
+        let myPosition = Driver.combineLatest(
             lat,
             lng
         ) { (latString: $0, lngString: $1) }
         
-        let getData = input.tappedSearchButton.asObservable()
-            .withLatestFrom(distance) { _, distance in
-                self.apiModel.getData(lat: distance.latString, lng: distance.lngString, range: .third)
+        // API通信
+        // 一覧
+        let fetchApiDataByGoCarefullySelectViewButton = input.tappedGoCarefullySelectViewButton.asObservable()
+            .withLatestFrom(myPosition)
+            .withLatestFrom(searchingRange)
+        { myPosition, range in
+                self.apiModel.getData(lat: myPosition.latString, lng: myPosition.lngString, range: range)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
-    
         
-        let goIntuitionSelectView = getData.asObservable()
+        let decodingApiDataByGoCarefullySelectViewButton = fetchApiDataByGoCarefullySelectViewButton.asObservable()
             .filter { $0 != nil }
             .map { data in
                 self.apiModel.decodeData(data: data!)
@@ -118,22 +145,69 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let getResutaurantData = goIntuitionSelectView.asObservable()
+        let setResutaurantDataByGoCarefullySelectViewButton = decodingApiDataByGoCarefullySelectViewButton.asObservable()
             .map { data in
                 self.resutaurantModel.getData(data: data)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
+        
+        let goCarefullySelectView = setResutaurantDataByGoCarefullySelectViewButton.asObservable()
+            .filter { $0 == true}
+            .map { result in
+                return result
+            }
+            .asDriver(onErrorDriveWith: .empty())
+        
+        
+        // 個別
+        let fetchApiDataByGoIntuitionSelectViewButton = input.tappedGoIntuitionSelectViewButton.asObservable()
+            .withLatestFrom(myPosition)
+            .withLatestFrom(searchingRange)
+        { myPosition, range in
+                self.apiModel.getData(lat: myPosition.latString, lng: myPosition.lngString, range: range)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let decodingApiDataByGoIntuitionSelectViewButton = fetchApiDataByGoIntuitionSelectViewButton.asObservable()
+            .filter { $0 != nil }
+            .map { data in
+                self.apiModel.decodeData(data: data!)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let setResutaurantDataByGoIntuitionSelectViewButton = decodingApiDataByGoIntuitionSelectViewButton.asObservable()
+            .map { data in
+                self.resutaurantModel.getData(data: data)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+    
+        
+        let goIntuitionSelectView = setResutaurantDataByGoIntuitionSelectViewButton.asObservable()
+            .filter { $0 == true}
+            .map { result in
+                return result
+            }
+            .asDriver(onErrorDriveWith: .empty())
        
         
-        return viewModelOutput(
+        return conditionalInputViewOutput(
             comunnicationState: comunnicationState,
-            getData: getData,
             lat: lat,
             lng: lng,
-            distance: distance,
+            myPosition: myPosition,
+            searchingRange: searchingRange,
+            fetchApiDataByGoCarefullySelectViewButton: fetchApiDataByGoCarefullySelectViewButton,
+            fetchApiDataByGoIntuitionSelectViewButton: fetchApiDataByGoIntuitionSelectViewButton,
+            decodingApiDataByGoCarefullySelectViewButton: decodingApiDataByGoCarefullySelectViewButton,
+            decodingApiDataByGoIntuitionSelectViewButton: decodingApiDataByGoIntuitionSelectViewButton,
+            setResutaurantDataByGoCarefullySelectViewButton: setResutaurantDataByGoCarefullySelectViewButton,
+            setResutaurantDataByGoIntuitionSelectViewButton: setResutaurantDataByGoIntuitionSelectViewButton,
             goIntuitionSelectView: goIntuitionSelectView,
-            getResutaurantData: getResutaurantData
+            goCarefullySelectView: goCarefullySelectView
         )
     }
     
