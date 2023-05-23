@@ -21,32 +21,38 @@
                                     <constraint firstAttribute="height" constant="30" id="AFY-zv-XaL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGE-r8-RDx" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                 <rect key="frame" x="110" y="720" width="170" height="60"/>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Xh8-Dw-Qdu"/>
                                 </constraints>
+                                <color key="tintColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="表示"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVK-FO-Yf1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                 <rect key="frame" x="30" y="720" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Osi-rm-nJp"/>
                                     <constraint firstAttribute="height" constant="60" id="r6D-dA-OKV"/>
                                 </constraints>
+                                <color key="tintColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="bad"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CU9-ni-hX1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                 <rect key="frame" x="300" y="720" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="P7l-xj-rRg"/>
                                     <constraint firstAttribute="height" constant="60" id="xOy-Fx-VT5"/>
                                 </constraints>
+                                <color key="tintColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="good"/>
                             </button>
@@ -59,17 +65,17 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf8-Lq-uyi">
                                         <rect key="frame" x="20" y="9.9999999999999982" width="290" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アクセス" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7P-I2-Pkb">
                                         <rect key="frame" x="20" y="50.333333333333343" width="290" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93760015080000003" green="0.55698084059999997" blue="0.24889844620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Wf8-Lq-uyi" firstAttribute="leading" secondItem="bMe-Ez-qv0" secondAttribute="leading" constant="20" id="3ib-Hi-R57"/>
                                     <constraint firstAttribute="trailing" secondItem="v7P-I2-Pkb" secondAttribute="trailing" constant="20" id="SfP-uL-F0E"/>
@@ -85,7 +91,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.93760015080000003" green="0.55698084059999997" blue="0.24889844620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="NGE-r8-RDx" secondAttribute="bottom" constant="30" id="0oi-uo-OrI"/>
                             <constraint firstItem="NGE-r8-RDx" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="7p9-FI-WSL"/>
