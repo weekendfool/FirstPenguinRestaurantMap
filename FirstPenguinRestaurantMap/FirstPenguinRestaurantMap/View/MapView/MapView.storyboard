@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,44 +16,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-1M-pvi">
-                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
-                                <standardMapConfiguration key="preferredConfiguration"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYT-P2-otT">
-                                <rect key="frame" x="145" y="740" width="100" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iph-8S-xZn" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                <rect key="frame" x="20" y="67" width="350" height="643"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ6-1M-pvi">
+                                        <rect key="frame" x="20" y="20" width="310" height="603"/>
+                                        <standardMapConfiguration key="preferredConfiguration"/>
+                                    </mapView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="KBs-Wt-DxC"/>
-                                    <constraint firstAttribute="height" constant="40" id="n07-Hg-aif"/>
+                                    <constraint firstItem="VJ6-1M-pvi" firstAttribute="top" secondItem="Iph-8S-xZn" secondAttribute="top" constant="20" id="Vzc-tL-qp6"/>
+                                    <constraint firstAttribute="bottom" secondItem="VJ6-1M-pvi" secondAttribute="bottom" constant="20" id="cwr-yv-OpQ"/>
+                                    <constraint firstItem="VJ6-1M-pvi" firstAttribute="leading" secondItem="Iph-8S-xZn" secondAttribute="leading" constant="20" id="fAL-Ru-KBg"/>
+                                    <constraint firstAttribute="trailing" secondItem="VJ6-1M-pvi" secondAttribute="trailing" constant="20" id="yYY-ij-ctx"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYT-P2-otT" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                <rect key="frame" x="20" y="730" width="350" height="50"/>
+                                <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ZK5-7r-FZg"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="back"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.99328035120000002" green="0.72061651950000005" blue="0.4279981256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="EYT-P2-otT" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0PX-eZ-2sW"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VJ6-1M-pvi" secondAttribute="bottom" id="BsB-VB-fJc"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="VJ6-1M-pvi" secondAttribute="trailing" id="Fnh-nR-2Fk"/>
-                            <constraint firstItem="VJ6-1M-pvi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GzG-6w-hgP"/>
-                            <constraint firstItem="VJ6-1M-pvi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="brw-wo-I8g"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="EYT-P2-otT" secondAttribute="bottom" constant="30" id="sMS-rf-Z5X"/>
+                            <constraint firstItem="EYT-P2-otT" firstAttribute="top" secondItem="Iph-8S-xZn" secondAttribute="bottom" constant="20" id="M1s-ev-rM4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Iph-8S-xZn" secondAttribute="trailing" constant="20" id="acH-gt-slU"/>
+                            <constraint firstItem="Iph-8S-xZn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="agH-dh-BwS"/>
+                            <constraint firstItem="EYT-P2-otT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="kxY-r1-Cs6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="EYT-P2-otT" secondAttribute="bottom" constant="30" id="pc2-QV-Rbk"/>
+                            <constraint firstItem="Iph-8S-xZn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="sGB-uF-yjh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EYT-P2-otT" secondAttribute="trailing" constant="20" id="xvb-Su-V97"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="baseView" destination="Iph-8S-xZn" id="90t-ew-1E7"/>
                         <outlet property="finishedButton" destination="EYT-P2-otT" id="g2I-v6-WS8"/>
                         <outlet property="mapView" destination="VJ6-1M-pvi" id="4HX-rH-NsQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="-2"/>
+            <point key="canvasLocation" x="56.92307692307692" y="-2.1327014218009479"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

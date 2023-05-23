@@ -10,15 +10,19 @@ import MapKit
 import CoreLocation
 import RxCocoa
 import RxSwift
+import EMTNeumorphicView
 
 class MapViewController: UIViewController {
     
     // MARK: - UIパーツ
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var finishedButton: UIButton!
+    @IBOutlet weak var finishedButton: EMTNeumorphicButton!
+    @IBOutlet weak var baseView: EMTNeumorphicView!
     
     // MARK: - 変数
+    
+    let viewModel: MapViewModel = MapViewModel()
     
     let disposeBag: DisposeBag = DisposeBag()
     let routerModel: RouterModel = RouterModel()
@@ -39,6 +43,9 @@ class MapViewController: UIViewController {
             changeLng(lng: userLng)
         }
     }
+    
+    var goalLat: Double = 0.0
+    var goalLng: Double = 0.0
     // MARK: - ライフサイクル
    
    
@@ -48,6 +55,10 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUserLocation()
+        
+        setupUI()
+        
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +78,6 @@ class MapViewController: UIViewController {
     static func makeFromStoryboard() -> MapViewController {
         let vc = UIStoryboard.mapViewController
         
-        print("ttttttttttttttttttt")
         
         return vc
     }
@@ -111,6 +121,146 @@ class MapViewController: UIViewController {
         
         mapView.setRegion(ragion, animated: true)
     }
+    
+    private func setupUI() {
+        
+        // baseView
+        baseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
+        baseView.neumorphicLayer?.cornerRadius = 24
+        baseView.neumorphicLayer?.depthType = .convex
+        baseView.neumorphicLayer?.elementDepth = 7
+        
+        // finishedButton
+        finishedButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
+        finishedButton.neumorphicLayer?.cornerRadius = 24
+        finishedButton.neumorphicLayer?.depthType = .convex
+        finishedButton.neumorphicLayer?.elementDepth = 7
+    }
+    
+    //道案内
+    func setRoot(goalLat: Double, goalLng: Double) {
+        // ゴール
+        let goalLocation = CLLocationCoordinate2D(latitude: goalLat, longitude: goalLng)
+        // 自分の位置
+        let myLocation = CLLocationCoordinate2D(latitude: Double(userLat)!, longitude: Double(userLng)!)
+        
+        // ゴール地点のピン
+        let anotation = MKPointAnnotation()
+        // 位置
+        anotation.coordinate = goalLocation
+        // メッセージ
+        anotation.title = "目的地"
+        mapView.addAnnotation(anotation)
+        
+        let goalPlaceMark = MKPlacemark(coordinate: goalLocation)
+        let myPlaceMark = MKPlacemark(coordinate: myLocation)
+        
+        // ルートのリクエスト
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: goalPlaceMark)
+        directionRequest.destination = MKMapItem(placemark: myPlaceMark)
+        // 歩き移動
+        directionRequest.transportType = .walking
+        
+        print("pppppppp")
+        
+        //
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { result, error in
+            guard let directionResons = result else {
+                if let error = error {
+                    print("======================")
+                    print("error at setRoot(): \(error)")
+                }
+                return
+            }
+            
+            // ルートの追加
+            
+            let route = directionResons.routes[0]
+            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+            
+        }
+        
+        
+    }
+    
+    
+    // 紐付け
+    private func bindViewModel() {
+        
+        let isMadeStoryboard = rx.methodInvoked(#selector(viewWillAppear(_:)))
+        let comunnicationState = rx.methodInvoked(#selector(getNetworkState))
+        let myLat = rx.methodInvoked(#selector(changeLat))
+        let myLng = rx.methodInvoked(#selector(changeLng))
+        
+        let input = MapViewModel.mapViewInput(
+            isMadeStoryboard: isMadeStoryboard,
+            comunnicationState: comunnicationState,
+            myLat: myLat,
+            myLng: myLng,
+            tappedBackButton: finishedButton.rx.tap.asSignal()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        // 通信状況
+        output.comunnicationState
+            .drive { [weak self] state in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        // 位置情報
+        output.myLat
+            .drive { lat in
+            }
+            .disposed(by: disposeBag)
+        
+        output.myLng
+            .drive { lng in
+            }
+            .disposed(by: disposeBag)
+        
+        output.myPosition
+            .drive { position in
+                print("position: \(position)")
+            }
+            .disposed(by: disposeBag)
+        
+        output.gatResutaurantData
+            .drive { result in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.goalLat
+            .drive { goalLat in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.goalLng
+            .drive { goalLat in
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.goalPostion
+            .drive { goalPostion in
+                self.setRoot(goalLat: goalPostion.lat, goalLng: goalPostion.lng)
+            }
+            .disposed(by: disposeBag)
+        
+        output.goConditionalInputView
+            .drive { result in
+                
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: - extension
@@ -119,12 +269,21 @@ extension MapViewController: MKMapViewDelegate {
     //　自己位置更新
     @objc func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
-        print("更新")
         userLat = String(userLocation.coordinate.latitude)
         userLng = String(userLocation.coordinate.longitude)
-        print("userLat : \(userLat)")
-        print("userLng : \(userLng)")
         
+        
+        
+    }
+}
+
+extension MapViewController {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 4.0
+        return renderer
     }
 }
 

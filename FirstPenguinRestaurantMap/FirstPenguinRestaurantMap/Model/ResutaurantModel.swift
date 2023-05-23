@@ -59,7 +59,11 @@ class ResutaurantModel {
                 lat: shop.lat,
                 lng: shop.lng,
                 access: shop.mobile_access,
-                imageULR: shop.photo.mobile.l.absoluteString
+                imageULR: shop.photo.mobile.l.absoluteString,
+                adress: shop.address,
+                businessHours: shop.open,
+                creditCard: shop.card
+                
             )
             
            print("shop : \(shop)")
@@ -70,7 +74,7 @@ class ResutaurantModel {
         }
         
 //        numberOfResutaurants = resutaurantArray.count
-        print("resutaurantArray : \(resutaurantArray[7].name)")
+//        print("resutaurantArray : \(resutaurantArray[7].name)")
         completion()
     }
     
@@ -90,6 +94,19 @@ class ResutaurantModel {
 
     }
     
+    func reloadSelectedRestaurantArray() -> Observable<Bool> {
+        return Observable.create { [self] observable in
+            
+            let userDefaluts = UserDefaults.standard
+            
+            selectedRestaurantArray = userDefaluts.getResutaurantData([RestaurantDataModel].self, forKey: "selectedRestaurantArray")!
+            
+            observable.onNext(true)
+            
+            return Disposables.create()
+        }
+    }
+    
     // データの返却
     func fetchStringData(item: item) -> Observable<String> {
         return Observable.create { [self] observable in
@@ -107,6 +124,12 @@ class ResutaurantModel {
                 observable.onNext(resutaurantArray[0].imageULR)
             case .numberOfRestaurants:
                 observable.onNext(String(resutaurantArray.count))
+            case .adress:
+                observable.onNext(resutaurantArray[0].adress)
+            case .businessHours:
+                observable.onNext(resutaurantArray[0].businessHours)
+            case .creditCard:
+                observable.onNext(resutaurantArray[0].creditCard)
             }
             return Disposables.create()
         }
@@ -129,6 +152,12 @@ class ResutaurantModel {
                 observable.onCompleted()
             case .numberOfRestaurants:
                 observable.onCompleted()
+            case .adress:
+                observable.onCompleted()
+            case .businessHours:
+                observable.onCompleted()
+            case .creditCard:
+                observable.onCompleted()
             }
             return Disposables.create()
         }
@@ -146,6 +175,86 @@ class ResutaurantModel {
             resutaurantArray.remove(at: 0)
             
             observable.onNext(true)
+            
+            return Disposables.create()
+        }
+    }
+    
+    func fetchSelectedRestaurantStringData(item: item) -> Observable<String> {
+        return Observable.create { [self] observable in
+            switch item {
+        
+            case .name:
+                observable.onNext(selectedRestaurantArray[0].name)
+            case .lat:
+                observable.onCompleted()
+            case .lng:
+                observable.onCompleted()
+            case .access:
+                observable.onNext(selectedRestaurantArray[0].access)
+            case .imageURL:
+                observable.onNext(selectedRestaurantArray[0].imageULR)
+            case .numberOfRestaurants:
+                observable.onNext(String(selectedRestaurantArray.count))
+            case .adress:
+                observable.onNext(selectedRestaurantArray[0].adress)
+            case .businessHours:
+                observable.onNext(selectedRestaurantArray[0].businessHours)
+            case .creditCard:
+                observable.onNext(selectedRestaurantArray[0].creditCard)
+            }
+            return Disposables.create()
+        }
+    }
+
+    // データの返却
+    func fetchSelectedRestaurantDoubleData(item: item) -> Observable<Double> {
+        return Observable.create { [self] observable in
+            switch item {
+        
+            case .name:
+                observable.onCompleted()
+            case .lat:
+                observable.onNext(selectedRestaurantArray[0].lat)
+            case .lng:
+                observable.onNext(selectedRestaurantArray[0].lng)
+            case .access:
+                observable.onCompleted()
+            case .imageURL:
+                observable.onCompleted()
+            case .numberOfRestaurants:
+                observable.onCompleted()
+            case .adress:
+                observable.onCompleted()
+            case .businessHours:
+                observable.onCompleted()
+            case .creditCard:
+                observable.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+       
+    func setectDataAtCarefullySelectView(indexPath: Int) -> Observable<Bool> {
+        return Observable.create { [self] observable in
+            
+            selectedRestaurantArray.append(resutaurantArray[indexPath])
+            
+            let userDefaults = UserDefaults.standard
+            
+            userDefaults.setResutaurantData(selectedRestaurantArray, forKey: "selectedRestaurantArray")
+            
+            observable.onNext(true)
+            
+            return Disposables.create()
+        }
+    }
+    
+    func setResutaurantData() -> Observable<[RestaurantDataModel]>{
+        return Observable.create { [self] observable in
+            
+            observable.onNext(resutaurantArray)
             
             return Disposables.create()
         }
@@ -190,6 +299,9 @@ enum item {
     case access
     case imageURL
     case numberOfRestaurants
+    case adress
+    case businessHours
+    case creditCard
 }
 
 extension item {
@@ -208,12 +320,18 @@ extension item {
             return "imageURL"
         case .numberOfRestaurants:
             return "numberOfRestaurants"
+        case .adress:
+            return "adress"
+        case .businessHours:
+            return "businessHours"
+        case .creditCard:
+            return "creditCard"
         }
     }
 }
 
 
-enum creidtCardState {
+enum creidtCardState: Codable {
     case exist
     case notExist
     case notClear

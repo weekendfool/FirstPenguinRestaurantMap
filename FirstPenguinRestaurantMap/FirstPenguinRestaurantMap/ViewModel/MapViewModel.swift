@@ -31,7 +31,7 @@ extension MapViewModel: MapViewModelType {
         let myLat: Observable<[Any]>
         let myLng: Observable<[Any]>
         
-        let tappedBackButton: Observable<[Any]>
+        let tappedBackButton: Signal<Void>
     }
     
     struct mapViewOutput {
@@ -39,9 +39,16 @@ extension MapViewModel: MapViewModelType {
         // 通信状況
         let comunnicationState: Driver<networkstate>
         // 距離
-        let lat: Driver<String>
-        let lng: Driver<String>
+        let myLat: Driver<String>
+        let myLng: Driver<String>
         let myPosition: Driver<(latString: String, lngString: String)>
+        
+        let gatResutaurantData: Driver<Bool>
+        
+        // 目的地
+        let goalLat: Driver<Double>
+        let goalLng: Driver<Double>
+        let goalPostion: Driver<(lat: Double, lng: Double)>
         
         // 画面遷移
         let goConditionalInputView: Driver<Bool>
@@ -56,13 +63,13 @@ extension MapViewModel: MapViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         // 位置情報
-        let lat = input.myLat.asObservable()
+        let myLat = input.myLat.asObservable()
             .map { lat in
                 return lat.first as! String
             }
             .asDriver(onErrorDriveWith: .empty())
         
-        let lng = input.myLng.asObservable()
+        let myLng = input.myLng.asObservable()
             .map { lng in
                 return lng.first as! String
             }
@@ -70,9 +77,37 @@ extension MapViewModel: MapViewModelType {
         
         
         let myPosition = Driver.combineLatest(
-            lat,
-            lng
+            myLat,
+            myLng
         ) { (latString: $0, lngString: $1) }
+        
+        let gatResutaurantData = input.isMadeStoryboard
+            .map { _ in
+                self.resutaurantModel.reloadSelectedRestaurantArray()
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let goalLat = gatResutaurantData.asObservable()
+            .filter { $0 == true }
+            .map { result in
+                self.resutaurantModel.fetchSelectedRestaurantDoubleData(item: .lat)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let goalLng = gatResutaurantData.asObservable()
+            .filter { $0 == true }
+            .map { result in
+                self.resutaurantModel.fetchSelectedRestaurantDoubleData(item: .lng)
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let goalPostion = Driver.combineLatest(
+            goalLat,
+            goalLng
+        ) { (lat: $0, lng: $1) }
         
         let goConditionalInputView = input.tappedBackButton.asObservable()
             .map { _ in
@@ -82,9 +117,13 @@ extension MapViewModel: MapViewModelType {
         
         return mapViewOutput(
             comunnicationState: comunnicationState,
-            lat: lat,
-            lng: lng,
+            myLat: myLat,
+            myLng: myLng,
             myPosition: myPosition,
+            gatResutaurantData: gatResutaurantData,
+            goalLat: goalLat,
+            goalLng: goalLng,
+            goalPostion: goalPostion,
             goConditionalInputView: goConditionalInputView
         )
     }
