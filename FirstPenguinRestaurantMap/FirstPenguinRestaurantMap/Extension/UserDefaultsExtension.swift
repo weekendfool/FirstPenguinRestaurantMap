@@ -12,7 +12,7 @@ import Foundation
 extension UserDefaults {
     
 
-    func setResutaurantData<T: Encodable>(_ value: T, forKey key: String) {
+    func setRestaurantData<T: Encodable>(_ value: T, forKey key: String) {
         guard let data = try? JSONEncoder().encode(value) else {
             print("can not Encode to JSON")
             return
@@ -20,7 +20,7 @@ extension UserDefaults {
         set (data, forKey: key)
     }
     
-    func getResutaurantData<T: Decodable>(_ type: T.Type, forKey key: String) -> T? {
+    func getRestaurantData<T: Decodable>(_ type: T.Type, forKey key: String) -> T? {
         guard let data = data(forKey: key) else {
             return nil
         }

@@ -17,7 +17,7 @@ protocol MapViewModelType {
 }
 
 final class MapViewModel {
-    private let resutaurantModel: ResutaurantModel = ResutaurantModel()
+    private let restaurantModel: RestaurantModel = RestaurantModel()
 }
 
 extension MapViewModel: MapViewModelType {
@@ -43,7 +43,7 @@ extension MapViewModel: MapViewModelType {
         let myLng: Driver<String>
         let myPosition: Driver<(latString: String, lngString: String)>
         
-        let gatResutaurantData: Driver<Bool>
+        let gatRestaurantData: Driver<Bool>
         
         // 目的地
         let goalLat: Driver<Double>
@@ -81,25 +81,25 @@ extension MapViewModel: MapViewModelType {
             myLng
         ) { (latString: $0, lngString: $1) }
         
-        let gatResutaurantData = input.isMadeStoryboard
+        let gatRestaurantData = input.isMadeStoryboard
             .map { _ in
-                self.resutaurantModel.reloadSelectedRestaurantArray()
+                self.restaurantModel.reloadRestaurantArray(isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let goalLat = gatResutaurantData.asObservable()
+        let goalLat = gatRestaurantData.asObservable()
             .filter { $0 == true }
             .map { result in
-                self.resutaurantModel.fetchSelectedRestaurantDoubleData(item: .lat)
+                self.restaurantModel.fetchDoubleData(item: .lat, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let goalLng = gatResutaurantData.asObservable()
+        let goalLng = gatRestaurantData.asObservable()
             .filter { $0 == true }
             .map { result in
-                self.resutaurantModel.fetchSelectedRestaurantDoubleData(item: .lng)
+                self.restaurantModel.fetchDoubleData(item: .lng, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
@@ -120,7 +120,7 @@ extension MapViewModel: MapViewModelType {
             myLat: myLat,
             myLng: myLng,
             myPosition: myPosition,
-            gatResutaurantData: gatResutaurantData,
+            gatRestaurantData: gatRestaurantData,
             goalLat: goalLat,
             goalLng: goalLng,
             goalPostion: goalPostion,

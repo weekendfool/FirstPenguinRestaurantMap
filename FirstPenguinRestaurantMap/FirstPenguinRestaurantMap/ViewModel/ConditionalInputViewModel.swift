@@ -21,7 +21,7 @@ protocol ConditionalInputViewModelType {
 final class ConditionalInputViewModel {
 
     private let apiModel: APIModel = APIModel()
-    private let resutaurantModel: ResutaurantModel = ResutaurantModel()
+    private let restaurantModel: RestaurantModel = RestaurantModel()
 }
 
 extension ConditionalInputViewModel: ConditionalInputViewModelType {
@@ -51,8 +51,8 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
         // 通信状況
         let comunnicationState: Driver<networkstate>
         
-        // APIData
-//        let fetchApi: Driver<Data?>
+       // restaurantの初期化
+        let resetRestaurantData: Driver<Bool>
         // 距離
         let lat: Driver<String>
         let lng: Driver<String>
@@ -69,8 +69,8 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
         let decodingApiDataByGoCarefullySelectViewButton: Driver<APIDataModel>
         let decodingApiDataByGoIntuitionSelectViewButton: Driver<APIDataModel>
         
-        let setResutaurantDataByGoCarefullySelectViewButton: Driver<Bool>
-        let setResutaurantDataByGoIntuitionSelectViewButton: Driver<Bool>
+        let setRestaurantDataByGoCarefullySelectViewButton: Driver<Bool>
+        let setRestaurantDataByGoIntuitionSelectViewButton: Driver<Bool>
         
         
         let goIntuitionSelectView: Driver<Bool>
@@ -87,18 +87,25 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             }
             .asDriver(onErrorDriveWith: .empty())
         
+        let resetRestaurantData = input.isMadeStoryboard
+            .map { _ in
+                self.restaurantModel.deleateRestaurantArray()
+            }
+            .merge()
+            .asDriver(onErrorDriveWith: .empty())
+        
         let searchingRange = input.selectedRange.asObservable()
             .map { inputRange in
                 switch inputRange {
-                case 1:
+                case 0:
                     return range.first
-                case 2:
+                case 1:
                     return range.second
-                case 3:
+                case 2:
                     return range.third
-                case 4:
+                case 3:
                     return range.fourth
-                case 5:
+                case 4:
                     return range.fifth
                 default:
                     return range.third
@@ -145,14 +152,14 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let setResutaurantDataByGoCarefullySelectViewButton = decodingApiDataByGoCarefullySelectViewButton.asObservable()
+        let setRestaurantDataByGoCarefullySelectViewButton = decodingApiDataByGoCarefullySelectViewButton.asObservable()
             .map { data in
-                self.resutaurantModel.getData(data: data)
+                self.restaurantModel.getData(data: data)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let goCarefullySelectView = setResutaurantDataByGoCarefullySelectViewButton.asObservable()
+        let goCarefullySelectView = setRestaurantDataByGoCarefullySelectViewButton.asObservable()
             .filter { $0 == true}
             .map { result in
                 return result
@@ -178,15 +185,15 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let setResutaurantDataByGoIntuitionSelectViewButton = decodingApiDataByGoIntuitionSelectViewButton.asObservable()
+        let setRestaurantDataByGoIntuitionSelectViewButton = decodingApiDataByGoIntuitionSelectViewButton.asObservable()
             .map { data in
-                self.resutaurantModel.getData(data: data)
+                self.restaurantModel.getData(data: data)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
     
         
-        let goIntuitionSelectView = setResutaurantDataByGoIntuitionSelectViewButton.asObservable()
+        let goIntuitionSelectView = setRestaurantDataByGoIntuitionSelectViewButton.asObservable()
             .filter { $0 == true}
             .map { result in
                 return result
@@ -196,6 +203,7 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
         
         return conditionalInputViewOutput(
             comunnicationState: comunnicationState,
+            resetRestaurantData: resetRestaurantData,
             lat: lat,
             lng: lng,
             myPosition: myPosition,
@@ -204,8 +212,8 @@ extension ConditionalInputViewModel: ConditionalInputViewModelType {
             fetchApiDataByGoIntuitionSelectViewButton: fetchApiDataByGoIntuitionSelectViewButton,
             decodingApiDataByGoCarefullySelectViewButton: decodingApiDataByGoCarefullySelectViewButton,
             decodingApiDataByGoIntuitionSelectViewButton: decodingApiDataByGoIntuitionSelectViewButton,
-            setResutaurantDataByGoCarefullySelectViewButton: setResutaurantDataByGoCarefullySelectViewButton,
-            setResutaurantDataByGoIntuitionSelectViewButton: setResutaurantDataByGoIntuitionSelectViewButton,
+            setRestaurantDataByGoCarefullySelectViewButton: setRestaurantDataByGoCarefullySelectViewButton,
+            setRestaurantDataByGoIntuitionSelectViewButton: setRestaurantDataByGoIntuitionSelectViewButton,
             goIntuitionSelectView: goIntuitionSelectView,
             goCarefullySelectView: goCarefullySelectView
         )

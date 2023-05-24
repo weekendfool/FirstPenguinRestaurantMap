@@ -54,6 +54,8 @@ class ConditionalInputViewController: UIViewController {
         
        
         setupUserLocation()
+        
+        setupUI()
         // viewmodelとの紐付け
         bindViewModel()
     }
@@ -95,28 +97,35 @@ class ConditionalInputViewController: UIViewController {
     private func setupUI() {
         
         // goCarefullySelectViewButton
-        goCarefullySelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goCarefullySelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         goCarefullySelectViewButton.neumorphicLayer?.cornerRadius = 24
         goCarefullySelectViewButton.neumorphicLayer?.depthType = .convex
         goCarefullySelectViewButton.neumorphicLayer?.elementDepth = 7
         
          // goIntuitionSelectViewButton
-        goIntuitionSelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goIntuitionSelectViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         goIntuitionSelectViewButton.neumorphicLayer?.cornerRadius = 24
         goIntuitionSelectViewButton.neumorphicLayer?.depthType = .convex
         goIntuitionSelectViewButton.neumorphicLayer?.elementDepth = 7
         
         // mapBaseView
-        mapBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        mapBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         mapBaseView.neumorphicLayer?.cornerRadius = 24
         mapBaseView.neumorphicLayer?.depthType = .convex
         mapBaseView.neumorphicLayer?.elementDepth = 7
         
         // sefumentedControlBaseView
-        sefumentedControlBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        sefumentedControlBaseView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         sefumentedControlBaseView.neumorphicLayer?.cornerRadius = 24
         sefumentedControlBaseView.neumorphicLayer?.depthType = .convex
         sefumentedControlBaseView.neumorphicLayer?.elementDepth = 7
+        
+        // distanceSegumentedControl
+        distanceSegumentedControl.selectedSegmentIndex = 2
+        
+        // ボタンの無効化
+        goCarefullySelectViewButton.isEnabled = false
+        goIntuitionSelectViewButton.isEnabled = false
         
     }
     
@@ -141,7 +150,6 @@ class ConditionalInputViewController: UIViewController {
             mapView.showsUserLocation = true
             mapView.userTrackingMode = .follow
             
-            print("userLocation: \(userLocation)")
 
             // 縮尺
             var ragion = mapView.region
@@ -162,12 +170,11 @@ class ConditionalInputViewController: UIViewController {
         let myLng = rx.methodInvoked(#selector(changeLng))
         
         
-        let x = distanceSegumentedControl.rx.numberOfSegments.asObserver()
         let input = ConditionalInputViewModel.conditionalInputViewInput(
             isMadeStoryboard: isMadeStoryboard,
             myLat: myLat,
             myLng: myLng,
-            selectedRange: distanceSegumentedControl.rx.numberOfSegments.asObserver()
+            selectedRange: distanceSegumentedControl.rx.selectedSegmentIndex.asObservable(),
             tappedGoCarefullySelectViewButton: goCarefullySelectViewButton.rx.tap.asSignal(), tappedGoIntuitionSelectViewButton: goIntuitionSelectViewButton.rx.tap.asSignal(),
             comunnicationState: comunnicationState
         )
@@ -176,7 +183,21 @@ class ConditionalInputViewController: UIViewController {
         
         // 通信状況
         output.comunnicationState
-            .drive { [weak self] state in
+            .drive { [self] state in
+                if state == .failureCommunication {
+                    showCommunicationAlert()
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.resetRestaurantData
+            .drive { [self] result in
+                if result {
+                    // ボタンの有効化
+                    goCarefullySelectViewButton.isEnabled = true
+                    goIntuitionSelectViewButton.isEnabled = true
+                }
                 
             }
             .disposed(by: disposeBag)
@@ -194,14 +215,12 @@ class ConditionalInputViewController: UIViewController {
         
         output.myPosition
             .drive { position in
-                print("position: \(position)")
             }
             .disposed(by: disposeBag)
         
         // 検索条件
         output.searchingRange
             .drive { range in
-                print("range: \(range)")
             }
             .disposed(by: disposeBag)
         
@@ -209,10 +228,7 @@ class ConditionalInputViewController: UIViewController {
         
         output.fetchApiDataByGoCarefullySelectViewButton
             .drive { data in
-                print("----------------")
-//                self.locationManager.requestWhenInUseAuthorization()
-                print("data: \(data)")
-                print("userlocation: \(self.userLocation.coordinate.latitude)")
+            
             }
             .disposed(by: disposeBag)
         
@@ -236,13 +252,13 @@ class ConditionalInputViewController: UIViewController {
             .disposed(by: disposeBag)
         
         // レストランの情報
-        output.setResutaurantDataByGoCarefullySelectViewButton
+        output.setRestaurantDataByGoCarefullySelectViewButton
             .drive { reuslt in
                 
             }
             .disposed(by: disposeBag)
         
-        output.setResutaurantDataByGoIntuitionSelectViewButton
+        output.setRestaurantDataByGoIntuitionSelectViewButton
             .drive { reuslt in
                 
             }
@@ -264,6 +280,23 @@ class ConditionalInputViewController: UIViewController {
                 }
             }
     }
+    
+    // MARK: - アラート
+    //　通信エラー
+    func showCommunicationAlert() {
+         let alert = UIAlertController(
+             title: "通信環境が不安定です",
+             message: "通信環境が良い場所で操作してください",
+             preferredStyle: .alert
+         )
+         
+         let noAction = UIAlertAction(title: "OK", style: .cancel)
+         
+         alert.addAction(noAction)
+         
+         present(alert, animated: true)
+         
+     }
     
 }
 

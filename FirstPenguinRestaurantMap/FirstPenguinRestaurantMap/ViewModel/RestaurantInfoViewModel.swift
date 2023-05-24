@@ -20,7 +20,7 @@ protocol RestaurantInfoViewModelType {
 
 final class RestaurantInfoViewModel {
     private let apiModel: APIModel = APIModel()
-    private let resutaurantModel: ResutaurantModel = ResutaurantModel()
+    private let restaurantModel: RestaurantModel = RestaurantModel()
 }
 
 
@@ -33,7 +33,6 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
         // 電波の状況
         let comunnicationState: Observable<[Any]>
         
-        let tappedGoMapView: Signal<Void>
     }
     
     struct restaurantInfoViewOutput {
@@ -42,13 +41,13 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
         
         let reloadRestaurantData: Driver<Bool>
                 
-        let resutaurantName: Driver<String>
-        let resutaurantAdress: Driver<String>
-        let resutaurantBusinessHours: Driver<String>
-        let creditCard: Driver<String>
-        let resutaurantImageUrlString: Driver<String>
         
-        let goMapView: Driver<Bool>
+        let restaurantName: Driver<String>
+        let restaurantAdress: Driver<String>
+        let restaurantBusinessHours: Driver<String>
+        let creditCard: Driver<String>
+        let restaurantImageUrlString: Driver<String>
+        
         
     }
     
@@ -63,31 +62,31 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
         
         let reloadRestaurantData = input.isMadeStoryboard
             .map { _ in
-                self.resutaurantModel.reloadResutaurantArray()
+                self.restaurantModel.reloadRestaurantArray(isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let resutaurantName = reloadRestaurantData.asObservable()
+        let restaurantName = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
-                self.resutaurantModel.fetchStringData(item: .name)
+                self.restaurantModel.fetchStringData(item: .name, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let resutaurantAdress = reloadRestaurantData.asObservable()
+        let restaurantAdress = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
-                self.resutaurantModel.fetchStringData(item: .adress)
+                self.restaurantModel.fetchStringData(item: .adress, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let resutaurantBusinessHours = reloadRestaurantData.asObservable()
+        let restaurantBusinessHours = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
-                self.resutaurantModel.fetchStringData(item: .businessHours)
+                self.restaurantModel.fetchStringData(item: .businessHours, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
@@ -95,35 +94,29 @@ extension RestaurantInfoViewModel: RestaurantInfoViewModelType {
         let creditCard = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
-                self.resutaurantModel.fetchStringData(item: .creditCard)
+                self.restaurantModel.fetchStringData(item: .creditCard, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let resutaurantImageUrlString = reloadRestaurantData.asObservable()
+        let restaurantImageUrlString = reloadRestaurantData.asObservable()
             .filter { $0 == true}
             .map { result in
-                self.resutaurantModel.fetchStringData(item: .imageURL)
+                self.restaurantModel.fetchStringData(item: .imageURL, isSelected: true)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
-        let goMapView = input.tappedGoMapView.asObservable()
-            .map { _ in
-                return true
-            }
-            .asDriver(onErrorDriveWith: .empty())
-        
+     
         
         return restaurantInfoViewOutput(
             comunnicationState: comunnicationState,
             reloadRestaurantData: reloadRestaurantData,
-            resutaurantName: resutaurantName,
-            resutaurantAdress: resutaurantAdress,
-            resutaurantBusinessHours: resutaurantBusinessHours,
+            restaurantName: restaurantName,
+            restaurantAdress: restaurantAdress,
+            restaurantBusinessHours: restaurantBusinessHours,
             creditCard: creditCard,
-            resutaurantImageUrlString: resutaurantImageUrlString,
-            goMapView: goMapView
+            restaurantImageUrlString: restaurantImageUrlString
         )
     }
 }

@@ -10,12 +10,13 @@ import RxCocoa
 import RxSwift
 import AlamofireImage
 import Alamofire
+import EMTNeumorphicView
 
 class CarefullySelectViewController: UIViewController {
     // MARK: - UIパーツ
     
-    @IBOutlet weak var resutaurantTableView: UITableView!
-    
+    @IBOutlet weak var restaurantTableView: UITableView!
+   
     // MARK: - 変数
     let viewModel: CarefullySelectViewModel = CarefullySelectViewModel()
     var disposeBag: DisposeBag = DisposeBag()
@@ -24,7 +25,7 @@ class CarefullySelectViewController: UIViewController {
     private let nWPathMonitorModel: NWPathMonitorModel = NWPathMonitorModel()
     
     // レストランデータ
-    var resutaurantDataArray: [RestaurantDataModel] = [] {
+    var restaurantDataArray: [RestaurantDataModel] = [] {
         didSet {
             setImage()
         }
@@ -41,17 +42,19 @@ class CarefullySelectViewController: UIViewController {
         super.viewDidLoad()
 
         bindViewModel()
+        restaurantTableView.delegate = self
+        restaurantTableView.dataSource = self
         
-        resutaurantTableView.delegate = self
-        resutaurantTableView.dataSource = self
+        setupUI()
         
-//        resutaurantTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         getNetworkState(state: networkstate.successfulCommunication as Any)
+        
+        
     }
     
 
@@ -73,19 +76,33 @@ class CarefullySelectViewController: UIViewController {
     }
     
     private func setupUI() {
-        resutaurantTableView.delegate = self
-        resutaurantTableView.dataSource = self
+        restaurantTableView.delegate = self
+        restaurantTableView.dataSource = self
         
+        restaurantTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            restaurantTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            restaurantTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+        ])
+       
+        restaurantTableView.backgroundColor = UIColor.clear
+        restaurantTableView.separatorStyle = .none
+        restaurantTableView.clipsToBounds = false
+        
+        restaurantTableView.rowHeight = UITableView.automaticDimension
+        
+       
     }
     
     private func setImage() {
         
-        for data in resutaurantDataArray {
+        for data in restaurantDataArray {
             AF.request(data.imageULR).responseImage { [self] result in
                 
                 if case .success(let image) = result.result {
-                    imageArray.append(image)
-                    resutaurantTableView.reloadData()
+                    let resizedImage = image.resaize(image: image, width: 100)
+                    imageArray.append(resizedImage)
+                    restaurantTableView.reloadData()
                 }
             }
         }
@@ -102,14 +119,16 @@ class CarefullySelectViewController: UIViewController {
         let input = CarefullySelectViewModel.carefullySelectViewInput(
             isMadeStoryboard: isMadeStoryboard,
             comunnicationState: comunnicationState,
-            goMapView: tappedCell
+            tappedCell: tappedCell
         )
         
         let output = viewModel.transform(input: input)
         
         output.comunnicationState
-            .drive { resurt in
-                
+            .drive { [self] state in
+                if state == .failureCommunication {
+                    showCommunicationAlert()
+                }
             }
             .disposed(by: disposeBag)
         
@@ -120,17 +139,34 @@ class CarefullySelectViewController: UIViewController {
         
         output.restaurantData
             .drive { [self] data in
-                resutaurantDataArray = data
+                restaurantDataArray = data
                 
             }
             .disposed(by: disposeBag)
         
         output.goMapView
             .drive { [self] result in
-                routerModel.showMapViewController(from: self)
+                routerModel.showRestaurantInfoViewController(from: self)
             }
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - アラート
+    //　通信エラー
+    func showCommunicationAlert() {
+         let alert = UIAlertController(
+             title: "通信環境が不安定です",
+             message: "通信環境が良い場所で操作してください",
+             preferredStyle: .alert
+         )
+         
+         let noAction = UIAlertAction(title: "OK", style: .cancel)
+         
+         alert.addAction(noAction)
+         
+         present(alert, animated: true)
+         
+     }
 }
 
 // MARK: - extension
@@ -141,24 +177,89 @@ extension CarefullySelectViewController: UITableViewDelegate  {
 }
 
 extension CarefullySelectViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resutaurantDataArray.count
+        return 1
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return restaurantDataArray.count
+     }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 2
+    }
+    
+   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RestaurantInfoTableViewCell
-        cell.resutaurantNameLabel.text = resutaurantDataArray[indexPath.row].name
-        cell.resutaurantAccessLabel.text = resutaurantDataArray[indexPath.row].access
-//        DispatchQueue.main.async { [self] in
-//            let imageUrl = resutaurantDataArray[indexPath.row].imageULR
-//            cell.setImage(url: imageUrl)
-        if imageArray.count != 0 {
-            cell.resutaurantImageView.image = imageArray[indexPath.row]
+        let type: EMTNeumorphicLayerCornerType = .all
+        let cellId = String(format: "cell%d", type.rawValue)
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
+        
+        cell = EMTNeumorphicTableCell(style: .subtitle, reuseIdentifier: cellId) //毎回セルを作る
+        if cell == nil {
+            cell = EMTNeumorphicTableCell(style: .subtitle, reuseIdentifier: cellId)
+            
+           
         }
         
-//        }
+        if let cell = cell as? EMTNeumorphicTableCell {
+           
+            cell.neumorphicLayer?.cornerType = type
+            cell.selectionStyle = .none;
+            cell.neumorphicLayer?.elementBackgroundColor = view.backgroundColor!.cgColor
+            cell.neumorphicLayer?.cornerRadius = 24
+
+            
+        }
         
-        return cell
+       
+        
+        if imageArray.count != 0 {
+            
+            let restaurant = restaurantDataArray[indexPath.section]
+            
+            
+            
+           // label設定
+            var context = cell?.defaultContentConfiguration()
+            context?.text = restaurantDataArray[indexPath.section].name
+            context?.textProperties.font = UIFont.systemFont(ofSize: 20)
+            context?.textProperties.numberOfLines = 0
+            context?.textProperties.lineBreakMode = .byClipping
+            
+            context?.secondaryText = restaurantDataArray[indexPath.section].access
+            context?.secondaryTextProperties.font = UIFont.systemFont(ofSize: 15)
+            context?.secondaryTextProperties.numberOfLines = 0
+            context?.secondaryTextProperties.lineBreakMode = .byClipping
+            
+            
+            
+            context?.image = imageArray[indexPath.section]
+        
+            context?.imageProperties
+            
+            cell?.contentConfiguration = context
+            
+            
+        }
+        
+        
+        return cell!
+    }
+    
+    // タップされた時
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 画面遷移
+        tappedCell(index: indexPath.section)
+        
+        
+    }
+    
+    // セルの高さ
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
     
    
@@ -171,7 +272,13 @@ extension CarefullySelectViewController {
 }
 
 extension CarefullySelectViewController {
-    @objc func tappedCell() {
+    @objc func tappedCell(index: Int) {
+        // 登録する
+    }
+}
+
+extension CarefullySelectViewController {
+    @objc func longTappedCell(index: Int) {
         // 登録する
     }
 }

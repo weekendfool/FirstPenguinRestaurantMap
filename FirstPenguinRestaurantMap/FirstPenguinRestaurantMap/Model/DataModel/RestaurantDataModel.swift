@@ -19,7 +19,6 @@ class RestaurantDataModel: Codable {
     var adress: String
     var businessHours: String
     var creditCard: String
-//    var creditCard: creidtCardState = .notClear
     
     
     init(name: String, lat: Double, lng: Double, access: String, imageULR: String, adress: String, businessHours: String, creditCard: String) {

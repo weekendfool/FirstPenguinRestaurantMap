@@ -111,14 +111,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accessLabel" destination="v7P-I2-Pkb" id="Bf5-Sy-3ZN"/>
+                        <outlet property="accessLabel" destination="v7P-I2-Pkb" id="Yb0-Xs-DN9"/>
                         <outlet property="badButton" destination="bVK-FO-Yf1" id="4fB-cd-gYR"/>
                         <outlet property="goMapViewButton" destination="NGE-r8-RDx" id="Fwg-Wv-Rqd"/>
                         <outlet property="goodButton" destination="CU9-ni-hX1" id="hTB-rL-Kwq"/>
-                        <outlet property="numberOfRestaurantsLabel" destination="dKc-Pa-4hc" id="wlr-E1-SXS"/>
-                        <outlet property="resutaurantImageView" destination="OoT-e2-TZy" id="alP-yX-988"/>
-                        <outlet property="resutaurantInfoView" destination="bMe-Ez-qv0" id="6HQ-rJ-boQ"/>
-                        <outlet property="resutaurantNameLabel" destination="Wf8-Lq-uyi" id="5rC-l4-wrE"/>
+                        <outlet property="numberOfRestaurantsLabel" destination="dKc-Pa-4hc" id="87d-YQ-jDo"/>
+                        <outlet property="restaurantImageView" destination="OoT-e2-TZy" id="47Z-SJ-MVU"/>
+                        <outlet property="restaurantInfoView" destination="bMe-Ez-qv0" id="g9w-gn-oVw"/>
+                        <outlet property="restaurantNameLabel" destination="Wf8-Lq-uyi" id="M9l-Mh-AdA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

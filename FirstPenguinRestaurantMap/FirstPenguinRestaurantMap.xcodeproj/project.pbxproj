@@ -24,7 +24,6 @@
 		8C7A6D262A0ECB84002BC73C /* ConditionalInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D252A0ECB84002BC73C /* ConditionalInputViewController.swift */; };
 		8C7A6D282A0ECB91002BC73C /* ConditionalInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D272A0ECB91002BC73C /* ConditionalInputViewModel.swift */; };
 		8C7A6D2A2A0ECD5D002BC73C /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D292A0ECD5D002BC73C /* APIModel.swift */; };
-		8C7A6D2D2A0FDC87002BC73C /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */; };
 		8C7A6D2F2A10CB34002BC73C /* NWPathMonitorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */; };
 		8C7A6D312A10CC96002BC73C /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D302A10CC96002BC73C /* RouterModel.swift */; };
 		8C7A6D342A10CCDB002BC73C /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */; };
@@ -85,7 +84,6 @@
 		8C7A6D272A0ECB91002BC73C /* ConditionalInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputViewModel.swift; sourceTree = "<group>"; };
 		8C7A6D292A0ECD5D002BC73C /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		8C7A6D2B2A0ED19C002BC73C /* 簡易仕様書.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "簡易仕様書.md"; sourceTree = "<group>"; };
-		8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWPathMonitorModel.swift; sourceTree = "<group>"; };
 		8C7A6D302A10CC96002BC73C /* RouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
 		8C7A6D332A10CCDB002BC73C /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 		8C7A6D042A0EC952002BC73C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8C7A6D2C2A0FDC87002BC73C /* MapModel.swift */,
 				8C7A6D292A0ECD5D002BC73C /* APIModel.swift */,
 				8C7A6D302A10CC96002BC73C /* RouterModel.swift */,
 				8C7A6D2E2A10CB34002BC73C /* NWPathMonitorModel.swift */,
@@ -565,7 +562,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C7A6D2A2A0ECD5D002BC73C /* APIModel.swift in Sources */,
-				8C7A6D2D2A0FDC87002BC73C /* MapModel.swift in Sources */,
 				8CA79CB12A153D0200C29CAC /* UIImageExtension.swift in Sources */,
 				8C7A6D312A10CC96002BC73C /* RouterModel.swift in Sources */,
 				8C7A6D202A0ECB5B002BC73C /* MapViewController.swift in Sources */,

@@ -12,14 +12,6 @@ import UIKit
 final class RouterModel {
     
     
-//    static func showRootConditionalInputView(window: UIWindow) {
-//
-//
-//        window.rootViewController = ConditionalInputViewController.makeFromStoryboard()
-//
-//
-//        window.makeKeyAndVisible()
-//    }
     
     // 検索画面
     func showConditionalInputViewController(from: UIViewController) {
@@ -53,7 +45,7 @@ final class RouterModel {
     func showRestaurantInfoViewController(from: UIViewController) {
         let vc = RestaurantInfoViewController.makeFromStoryboard()
         
-        show(from: from, next: vc)
+        showHarfModal(from: from, next: vc)
     }
     
     
@@ -66,6 +58,11 @@ extension RouterModel {
         
         next.modalPresentationStyle = .fullScreen
         next.modalTransitionStyle = .flipHorizontal
+        from.present(next, animated: animated, completion: nil)
+    }
+    
+    func showHarfModal(from: UIViewController, next: UIViewController, animated: Bool = true) {
+
         from.present(next, animated: animated, completion: nil)
     }
 }

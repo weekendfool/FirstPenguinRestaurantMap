@@ -1,5 +1,5 @@
 //
-//  ResutaurantModel.swift
+//  RestaurantModel.swift
 //  FirstPenguinRestaurantMap
 //
 //  Created by Oh!ara on 2023/05/17.
@@ -11,36 +11,30 @@ import Foundation
 import RxSwift
 
 
-class ResutaurantModel {
+class RestaurantModel {
     
    // 全件データ配列
-    var resutaurantArray: [RestaurantDataModel] = []
+    var restaurantArray: [RestaurantDataModel] = []
     // 選ばれた配列
     var selectedRestaurantArray: [RestaurantDataModel] = []
     
-    // 件数
-//    var numberOfResutaurants: Int = 0
+    let userDefaults = UserDefaults.standard
     
     
     // MARK: - 関数
 
+    // 取得したデータの整形
     func getData(data: APIDataModel) -> Observable<Bool> {
         
-        let userDefaluts = UserDefaults.standard
         
         return Observable.create { [self] observable in
-            
             
             
             let inputData = data.results.shop
             
             changeData(inputData: inputData) {
-                userDefaluts.setResutaurantData(resutaurantArray, forKey: "resutaurant")
-                
-                print("555555555555555555555555555555")
-                print("resutaurantArray: \(resutaurantArray)")
-//                userDefaluts.set(resutaurantArray.count, forKey: item.numberOfRestaurants.isValue)
-                
+                userDefaults.setRestaurantData(restaurantArray, forKey: "restaurant")
+   
                 observable.onNext(true)
             }
 
@@ -48,131 +42,166 @@ class ResutaurantModel {
             return Disposables.create()
         }
     }
-    
-   
-    
     private func changeData(inputData: [shop], completion: ()->()){
-        for shop in inputData {
-            
-            var resutaurant: RestaurantDataModel = RestaurantDataModel(
-                name: shop.name,
-                lat: shop.lat,
-                lng: shop.lng,
-                access: shop.mobile_access,
-                imageULR: shop.photo.mobile.l.absoluteString,
-                adress: shop.address,
-                businessHours: shop.open,
-                creditCard: shop.card
-                
-            )
-            
-           print("shop : \(shop)")
-            print("resutaurant : \(resutaurant.name)")
-
-            
-            resutaurantArray.append(resutaurant)
-        }
+    for shop in inputData {
         
-//        numberOfResutaurants = resutaurantArray.count
-//        print("resutaurantArray : \(resutaurantArray[7].name)")
-        completion()
+        var restaurant: RestaurantDataModel = RestaurantDataModel(
+            name: shop.name,
+            lat: shop.lat,
+            lng: shop.lng,
+            access: shop.mobile_access,
+            imageULR: shop.photo.mobile.l.absoluteString,
+            adress: shop.address,
+            businessHours: shop.open,
+            creditCard: shop.card
+            
+        )
+        
+    
+        restaurantArray.append(restaurant)
     }
+
+    completion()
+}
     
  
-    
-    func reloadResutaurantArray() -> Observable<Bool> {
+    // データのリロード
+    func reloadRestaurantArray(isSelected: Bool) -> Observable<Bool> {
         
         return Observable.create { [self] observable in
-            let userDefaluts = UserDefaults.standard
             
-            resutaurantArray = userDefaluts.getResutaurantData([RestaurantDataModel].self, forKey: "resutaurant")!
+            if isSelected {
+                selectedRestaurantArray = userDefaults.getRestaurantData([RestaurantDataModel].self, forKey: "selectedRestaurant")!
+                
+                observable.onNext(true)
+            } else {
+                restaurantArray = userDefaults.getRestaurantData([RestaurantDataModel].self, forKey: "restaurant")!
+                observable.onNext(true)
+            }
             
-            observable.onNext(true)
             
             return Disposables.create()
         }
 
     }
     
-    func reloadSelectedRestaurantArray() -> Observable<Bool> {
+    // データの返却
+    func fetchStringData(item: item, isSelected: Bool) -> Observable<String> {
         return Observable.create { [self] observable in
             
-            let userDefaluts = UserDefaults.standard
+            if isSelected {
+                switch item {
             
-            selectedRestaurantArray = userDefaluts.getResutaurantData([RestaurantDataModel].self, forKey: "selectedRestaurantArray")!
+                case .name:
+                    observable.onNext(selectedRestaurantArray[0].name)
+                case .lat:
+                    observable.onCompleted()
+                case .lng:
+                    observable.onCompleted()
+                case .access:
+                    observable.onNext(selectedRestaurantArray[0].access)
+                case .imageURL:
+                    observable.onNext(selectedRestaurantArray[0].imageULR)
+                case .numberOfRestaurants:
+                    observable.onNext(String(selectedRestaurantArray.count))
+                case .adress:
+                    observable.onNext(selectedRestaurantArray[0].adress)
+                case .businessHours:
+                    observable.onNext(selectedRestaurantArray[0].businessHours)
+                case .creditCard:
+                    observable.onNext(selectedRestaurantArray[0].creditCard)
+                }
+            } else {
+                switch item {
             
-            observable.onNext(true)
+                case .name:
+                    observable.onNext(restaurantArray[0].name)
+                case .lat:
+                    observable.onCompleted()
+                case .lng:
+                    observable.onCompleted()
+                case .access:
+                    observable.onNext(restaurantArray[0].access)
+                case .imageURL:
+                    observable.onNext(restaurantArray[0].imageULR)
+                case .numberOfRestaurants:
+                    observable.onNext(String(restaurantArray.count))
+                case .adress:
+                    observable.onNext(restaurantArray[0].adress)
+                case .businessHours:
+                    observable.onNext(restaurantArray[0].businessHours)
+                case .creditCard:
+                    observable.onNext(restaurantArray[0].creditCard)
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    func fetchDoubleData(item: item, isSelected: Bool) -> Observable<Double> {
+        return Observable.create { [self] observable in
+            
+            if isSelected {
+                switch item {
+            
+                case .name:
+                    observable.onCompleted()
+                case .lat:
+                    observable.onNext(selectedRestaurantArray[0].lat)
+                case .lng:
+                    observable.onNext(selectedRestaurantArray[0].lng)
+                case .access:
+                    observable.onCompleted()
+                case .imageURL:
+                    observable.onCompleted()
+                case .numberOfRestaurants:
+                    observable.onCompleted()
+                case .adress:
+                    observable.onCompleted()
+                case .businessHours:
+                    observable.onCompleted()
+                case .creditCard:
+                    observable.onCompleted()
+                }
+            } else {
+                switch item {
+            
+                case .name:
+                    observable.onCompleted()
+                case .lat:
+                    observable.onNext(restaurantArray[0].lat)
+                case .lng:
+                    observable.onNext(restaurantArray[0].lng)
+                case .access:
+                    observable.onCompleted()
+                case .imageURL:
+                    observable.onCompleted()
+                case .numberOfRestaurants:
+                    observable.onCompleted()
+                case .adress:
+                    observable.onCompleted()
+                case .businessHours:
+                    observable.onCompleted()
+                case .creditCard:
+                    observable.onCompleted()
+                }
+            }
             
             return Disposables.create()
         }
     }
     
-    // データの返却
-    func fetchStringData(item: item) -> Observable<String> {
-        return Observable.create { [self] observable in
-            switch item {
-        
-            case .name:
-                observable.onNext(resutaurantArray[0].name)
-            case .lat:
-                observable.onCompleted()
-            case .lng:
-                observable.onCompleted()
-            case .access:
-                observable.onNext(resutaurantArray[0].access)
-            case .imageURL:
-                observable.onNext(resutaurantArray[0].imageULR)
-            case .numberOfRestaurants:
-                observable.onNext(String(resutaurantArray.count))
-            case .adress:
-                observable.onNext(resutaurantArray[0].adress)
-            case .businessHours:
-                observable.onNext(resutaurantArray[0].businessHours)
-            case .creditCard:
-                observable.onNext(resutaurantArray[0].creditCard)
-            }
-            return Disposables.create()
-        }
-    }
 
-    // データの返却
-    func fetchDoubleData(item: item) -> Observable<Double> {
-        return Observable.create { [self] observable in
-            switch item {
-        
-            case .name:
-                observable.onCompleted()
-            case .lat:
-                observable.onNext(resutaurantArray[0].lat)
-            case .lng:
-                observable.onNext(resutaurantArray[0].lng)
-            case .access:
-                observable.onCompleted()
-            case .imageURL:
-                observable.onCompleted()
-            case .numberOfRestaurants:
-                observable.onCompleted()
-            case .adress:
-                observable.onCompleted()
-            case .businessHours:
-                observable.onCompleted()
-            case .creditCard:
-                observable.onCompleted()
-            }
-            return Disposables.create()
-        }
-    }
-    
     // データの整理
     func selectData(isSelected: Bool) -> Observable<Bool> {
         return Observable.create { [self] observable in
             
             if isSelected {
                 
-                selectedRestaurantArray.append(resutaurantArray[0])
+                selectedRestaurantArray.append(restaurantArray[0])
             }
             
-            resutaurantArray.remove(at: 0)
+            restaurantArray.remove(at: 0)
             
             observable.onNext(true)
             
@@ -180,115 +209,55 @@ class ResutaurantModel {
         }
     }
     
-    func fetchSelectedRestaurantStringData(item: item) -> Observable<String> {
-        return Observable.create { [self] observable in
-            switch item {
-        
-            case .name:
-                observable.onNext(selectedRestaurantArray[0].name)
-            case .lat:
-                observable.onCompleted()
-            case .lng:
-                observable.onCompleted()
-            case .access:
-                observable.onNext(selectedRestaurantArray[0].access)
-            case .imageURL:
-                observable.onNext(selectedRestaurantArray[0].imageULR)
-            case .numberOfRestaurants:
-                observable.onNext(String(selectedRestaurantArray.count))
-            case .adress:
-                observable.onNext(selectedRestaurantArray[0].adress)
-            case .businessHours:
-                observable.onNext(selectedRestaurantArray[0].businessHours)
-            case .creditCard:
-                observable.onNext(selectedRestaurantArray[0].creditCard)
-            }
-            return Disposables.create()
-        }
-    }
-
-    // データの返却
-    func fetchSelectedRestaurantDoubleData(item: item) -> Observable<Double> {
-        return Observable.create { [self] observable in
-            switch item {
-        
-            case .name:
-                observable.onCompleted()
-            case .lat:
-                observable.onNext(selectedRestaurantArray[0].lat)
-            case .lng:
-                observable.onNext(selectedRestaurantArray[0].lng)
-            case .access:
-                observable.onCompleted()
-            case .imageURL:
-                observable.onCompleted()
-            case .numberOfRestaurants:
-                observable.onCompleted()
-            case .adress:
-                observable.onCompleted()
-            case .businessHours:
-                observable.onCompleted()
-            case .creditCard:
-                observable.onCompleted()
-            }
-            return Disposables.create()
-        }
-    }
     
-       
-    func setectDataAtCarefullySelectView(indexPath: Int) -> Observable<Bool> {
+    // 選択されたレストランのデータの格納
+    func selectRestaurant(indexPath: Int) -> Observable<Bool> {
         return Observable.create { [self] observable in
             
-            selectedRestaurantArray.append(resutaurantArray[indexPath])
+            selectedRestaurantArray.append(restaurantArray[indexPath])
             
-            let userDefaults = UserDefaults.standard
             
-            userDefaults.setResutaurantData(selectedRestaurantArray, forKey: "selectedRestaurantArray")
+            userDefaults.setRestaurantData(selectedRestaurantArray, forKey: "selectedRestaurant")
             
             observable.onNext(true)
             
             return Disposables.create()
         }
     }
-    
-    func setResutaurantData() -> Observable<[RestaurantDataModel]>{
+    func setRestaurantData() -> Observable<[RestaurantDataModel]>{
         return Observable.create { [self] observable in
             
-            observable.onNext(resutaurantArray)
+            observable.onNext(restaurantArray)
             
             return Disposables.create()
         }
     }
     
-    
-    func reloadData() {
-        
-        let userDefaluts = UserDefaults.standard
-        
-        resutaurantArray = userDefaluts.getResutaurantData([RestaurantDataModel].self, forKey: "resutaurant")!
-        
-        for shop in resutaurantArray {
-            print("resutaurantData: \(resutaurantArray)")
-            print("data2: \(shop.name)")
-       
-//
-//        switch item {
-//        case .name:
-//            resutaurant.name = shop.string(forKey: item.isValue)!
-//        case .lat:
-//            resutaurant.lat = shop.double(forKey: item.isValue)
-//        case .lng:
-//            resutaurant.lng = shop.double(forKey: item.isValue)
-//        case .access:
-//            resutaurant.access = shop.string(forKey: item.isValue)!
-//        case .imageURL:
-//            resutaurant.imageULR = shop.string(forKey: item.isValue)!
-//        }
+    // データの削除
+    func deleateRestaurantArray() -> Observable<Bool> {
+        return Observable.create { [self] observable in
+            
+            deleateRestaurantData {
+                observable.onNext(true)
+            }
+            return Disposables.create()
         }
-//        completion()
-        
     }
     
+    private func deleateRestaurantData(completion:()->()) {
+        
+        restaurantArray.removeAll()
+        selectedRestaurantArray.removeAll()
+        
+       
+        
+        if restaurantArray.count == 0 && selectedRestaurantArray.count == 0 {
+            userDefaults.setRestaurantData(restaurantArray, forKey: "restaurant")
+            userDefaults.setRestaurantData(selectedRestaurantArray, forKey: "selectedRestaurant")
+            completion()
+        }
+    }
+        
     
 }
 
@@ -330,9 +299,3 @@ extension item {
     }
 }
 
-
-enum creidtCardState: Codable {
-    case exist
-    case notExist
-    case notClear
-}

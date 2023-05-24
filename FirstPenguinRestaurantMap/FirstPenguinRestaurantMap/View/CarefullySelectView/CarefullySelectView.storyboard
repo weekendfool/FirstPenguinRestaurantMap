@@ -41,7 +41,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="resutaurantTableView" destination="wPu-xw-6UI" id="BHa-kE-Jgn"/>
+                        <outlet property="restaurantTableView" destination="wPu-xw-6UI" id="3wt-cD-Tdp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

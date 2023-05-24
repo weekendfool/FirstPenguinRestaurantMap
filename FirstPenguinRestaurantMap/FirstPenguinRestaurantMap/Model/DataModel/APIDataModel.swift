@@ -10,13 +10,11 @@
 import Foundation
 
 struct APIDataModel: Codable {
-//    var results_available: Int
-//    var results_returned: String
+
     var results: results
 }
 
 struct results: Codable {
-//    var results_returned: String
     var shop: [shop]
 }
 

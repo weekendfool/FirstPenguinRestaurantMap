@@ -49,19 +49,13 @@ final class APIModel {
         return Observable.create { observable in
             
             AF.request(url!).responseJSON { response in
-                
-                print("response: \(response.response?.statusCode)")
-                print("result: \(response.data)")
+            
                 switch response.result {
                 case .success:
                     
-                    print("=======================")
-                    print("ok")
                     observable.onNext(response.data)
                 case .failure:
                     
-                    print("=======================")
-                    print("No")
                     observable.onNext(nil)
                 }
             }
@@ -69,14 +63,7 @@ final class APIModel {
         }
     }
     
-//    func getImage(url: String) -> Observable<UIImage> {
-//        return Observable.create { observable in
-//            
-//            AF.
-//            return Disposables.create()
-//        }
-//    }
-//    
+
     // 情報の取得
     
     // デコード

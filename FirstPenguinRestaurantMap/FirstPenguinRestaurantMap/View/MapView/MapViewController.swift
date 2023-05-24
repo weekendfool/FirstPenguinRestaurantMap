@@ -46,6 +46,7 @@ class MapViewController: UIViewController {
     
     var goalLat: Double = 0.0
     var goalLng: Double = 0.0
+    
     // MARK: - ライフサイクル
    
    
@@ -53,7 +54,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         setupUserLocation()
         
         setupUI()
@@ -162,7 +162,6 @@ class MapViewController: UIViewController {
         // 歩き移動
         directionRequest.transportType = .walking
         
-        print("pppppppp")
         
         //
         let directions = MKDirections(request: directionRequest)
@@ -180,8 +179,8 @@ class MapViewController: UIViewController {
             let route = directionResons.routes[0]
             self.mapView.addOverlay(route.polyline, level: .aboveRoads)
             
-            let rect = route.polyline.boundingMapRect
-            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+//            let rect = route.polyline.boundingMapRect
+//            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
             
         }
         
@@ -209,8 +208,10 @@ class MapViewController: UIViewController {
         
         // 通信状況
         output.comunnicationState
-            .drive { [weak self] state in
-                
+            .drive { [self] state in
+                if state == .failureCommunication {
+                    showCommunicationAlert()
+                }
             }
             .disposed(by: disposeBag)
         
@@ -231,7 +232,7 @@ class MapViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.gatResutaurantData
+        output.gatRestaurantData
             .drive { result in
                 
             }
@@ -256,11 +257,29 @@ class MapViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.goConditionalInputView
-            .drive { result in
-                
+            .drive { [self] result in
+                routerModel.showConditionalInputViewController(from: self)
             }
             .disposed(by: disposeBag)
     }
+    
+    
+    // MARK: - アラート
+    //　通信エラー
+    func showCommunicationAlert() {
+         let alert = UIAlertController(
+             title: "通信環境が不安定です",
+             message: "通信環境が良い場所で操作してください",
+             preferredStyle: .alert
+         )
+         
+         let noAction = UIAlertAction(title: "OK", style: .cancel)
+         
+         alert.addAction(noAction)
+         
+         present(alert, animated: true)
+         
+     }
 }
 
 // MARK: - extension
@@ -272,7 +291,7 @@ extension MapViewController: MKMapViewDelegate {
         userLat = String(userLocation.coordinate.latitude)
         userLng = String(userLocation.coordinate.longitude)
         
-        
+//        setRoot(goalLat: goalLat, goalLng: goalLng)
         
     }
 }
@@ -281,7 +300,7 @@ extension MapViewController {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
+        renderer.strokeColor = UIColor.init(red: 0 / 255, green: 84 / 255, blue: 147 / 255, alpha: 1)
         renderer.lineWidth = 4.0
         return renderer
     }

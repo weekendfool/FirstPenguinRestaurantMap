@@ -16,13 +16,13 @@ class IntuitionSelectViewController: UIViewController {
     // MARK: - UIパーツ
     
     @IBOutlet weak var numberOfRestaurantsLabel: UILabel!
-    @IBOutlet weak var resutaurantNameLabel: UILabel!
+    @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var accessLabel: UILabel!
-    @IBOutlet weak var resutaurantImageView: UIImageView!
+    @IBOutlet weak var restaurantImageView: UIImageView!
     @IBOutlet weak var badButton: EMTNeumorphicButton!
     @IBOutlet weak var goodButton: EMTNeumorphicButton!
     @IBOutlet weak var goMapViewButton: EMTNeumorphicButton!
-    @IBOutlet weak var resutaurantInfoView: EMTNeumorphicView!
+    @IBOutlet weak var restaurantInfoView: EMTNeumorphicView!
     
     // MARK: - 変数
 
@@ -76,37 +76,37 @@ class IntuitionSelectViewController: UIViewController {
     func setupUI() {
         
         // ラベルの設定
-        resutaurantNameLabel.sizeToFit()
+        restaurantNameLabel.sizeToFit()
         accessLabel.sizeToFit()
         
         // ジェスチャーの設定
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedResutaurantInfoView))
-        resutaurantInfoView.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedRestaurantInfoView))
+        restaurantInfoView.addGestureRecognizer(tapGesture)
         
         // EMTNeumorphicViewの設定
         // badButton
-        badButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        badButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         badButton.neumorphicLayer?.cornerRadius = 24
         badButton.neumorphicLayer?.depthType = .convex
         badButton.neumorphicLayer?.elementDepth = 7
         
         // goodButton
-        goodButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goodButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         goodButton.neumorphicLayer?.cornerRadius = 24
         goodButton.neumorphicLayer?.depthType = .convex
         goodButton.neumorphicLayer?.elementDepth = 7
         
         // goMapViewButton
-        goMapViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
+        goMapViewButton.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
         goMapViewButton.neumorphicLayer?.cornerRadius = 24
         goMapViewButton.neumorphicLayer?.depthType = .convex
         goMapViewButton.neumorphicLayer?.elementDepth = 7
        
-       // resutaurantInfoView
-        resutaurantInfoView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 239 / 255, green: 142 / 255, blue: 63 / 255, alpha: 1)
-        resutaurantInfoView.neumorphicLayer?.cornerRadius = 24
-        resutaurantInfoView.neumorphicLayer?.depthType = .convex
-        resutaurantInfoView.neumorphicLayer?.elementDepth = 7
+       // restaurantInfoView
+        restaurantInfoView.neumorphicLayer!.elementBackgroundColor = view.backgroundColor?.cgColor ?? .init(red: 253 / 255, green: 184 / 255, blue: 109 / 255, alpha: 1)
+        restaurantInfoView.neumorphicLayer?.cornerRadius = 24
+        restaurantInfoView.neumorphicLayer?.depthType = .convex
+        restaurantInfoView.neumorphicLayer?.elementDepth = 7
         
     }
     
@@ -114,7 +114,7 @@ class IntuitionSelectViewController: UIViewController {
         AF.request(url).responseImage { [self] result in
             
             if case .success(let image) = result.result {
-                resutaurantImageView.image = image
+                restaurantImageView.image = image
             }
         }
     }
@@ -123,7 +123,7 @@ class IntuitionSelectViewController: UIViewController {
     func bindViewModel() {
         let isMadeStoryboard = rx.methodInvoked(#selector(viewWillAppear(_:)))
         let comunnicationState = rx.methodInvoked(#selector(getNetworkState))
-        let tappedResutaurantInfoView = rx.methodInvoked(#selector(tappedResutaurantInfoView))
+        let tappedRestaurantInfoView = rx.methodInvoked(#selector(tappedRestaurantInfoView))
         
         
         let input = IntuitionSelectViewModel.intuitionSelectViewInput(
@@ -131,7 +131,7 @@ class IntuitionSelectViewController: UIViewController {
             comunnicationState: comunnicationState,
             tappedBadButton: badButton.rx.tap.asSignal(),
             tappedGoodButton: goodButton.rx.tap.asSignal(),
-            tappedResutaurantInfoView: tappedResutaurantInfoView,
+            tappedRestaurantInfoView: tappedRestaurantInfoView,
             tappedGoMapViewButton: goMapViewButton.rx.tap.asSignal()
         )
         
@@ -139,8 +139,10 @@ class IntuitionSelectViewController: UIViewController {
         
         // 通信状況
         output.comunnicationState
-            .drive { [weak self] state in
-                
+            .drive { [self] state in
+                if state == .failureCommunication {
+                    showCommunicationAlert()
+                }
             }
             .disposed(by: disposeBag)
         
@@ -154,33 +156,31 @@ class IntuitionSelectViewController: UIViewController {
         // 件数の表示
         output.firstNumberOfRestaurantsLabel
             .drive { [weak self] numberOfRestaurants in
-                self?.numberOfRestaurantsLabel.text = numberOfRestaurants
+                self?.numberOfRestaurantsLabel.text = "全\(numberOfRestaurants)件"
             }
             .disposed(by: disposeBag)
         
         // レストランの名前
-        output.firstResutaurantNameLabel
-            .drive { [weak self] resutaurantName in
-                self?.resutaurantNameLabel.text = resutaurantName
+        output.firstRestaurantNameLabel
+            .drive { [weak self] restaurantName in
+                self?.restaurantNameLabel.text = restaurantName
             }
             .disposed(by: disposeBag)
         
         // アクセス
         output.firstAccessLabel
             .drive { [weak self] access in
-                self?.accessLabel.text = access
-//                self?.accessLabel.sizeToFit()
+                self?.accessLabel.text = "アクセス:\(access)"
             }
             .disposed(by: disposeBag)
         
         output.gatImageUrl
             .drive { [self] url in
-                print("url: \(url)")
             }
             .disposed(by: disposeBag)
         
         //　image
-        output.firstResutaurantImageView
+        output.firstRestaurantImageView
             .drive { [self] imageString in
                setImage(url: imageString)
             }
@@ -188,14 +188,14 @@ class IntuitionSelectViewController: UIViewController {
         
         // ボタン
         output.changeCounterByBadButton
-            .drive { [weak self] result in
-               
+            .drive { [self] result in
+                UIView.transition(with: restaurantInfoView, duration: 0.5, options: [.transitionCurlUp], animations: nil)
             }
             .disposed(by: disposeBag)
         
         output.changeCounterByGoodButton
-            .drive { [weak self] result in
-                
+            .drive { [self] result in
+                UIView.transition(with: restaurantInfoView, duration: 0.5, options: [.transitionCrossDissolve], animations: nil)
             }
             .disposed(by: disposeBag)
         
@@ -206,9 +206,9 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.resutaurantNameLabelByBadButton
-            .drive { [weak self] resutaurantName in
-                self?.resutaurantNameLabel.text = resutaurantName
+        output.restaurantNameLabelByBadButton
+            .drive { [weak self] restaurantName in
+                self?.restaurantNameLabel.text = restaurantName
             }
             .disposed(by: disposeBag)
         
@@ -218,7 +218,7 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.resutaurantImageViewByBadButton
+        output.restaurantImageViewByBadButton
             .drive { [self] imageString in
                 setImage(url: imageString)
             }
@@ -236,9 +236,9 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.resutaurantNameLabelByGoodButton
-            .drive { [weak self] resutaurantName in
-                self?.resutaurantNameLabel.text = resutaurantName
+        output.restaurantNameLabelByGoodButton
+            .drive { [weak self] restaurantName in
+                self?.restaurantNameLabel.text = restaurantName
             }
             .disposed(by: disposeBag)
         
@@ -248,7 +248,7 @@ class IntuitionSelectViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.resutaurantImageViewByGoodButton
+        output.restaurantImageViewByGoodButton
             .drive { [self] imageString in
                 setImage(url: imageString)
             }
@@ -268,6 +268,23 @@ class IntuitionSelectViewController: UIViewController {
         
     }
     
+    // MARK: - アラート
+    //　通信エラー
+    func showCommunicationAlert() {
+         let alert = UIAlertController(
+             title: "通信環境が不安定です",
+             message: "通信環境が良い場所で操作してください",
+             preferredStyle: .alert
+         )
+         
+         let noAction = UIAlertAction(title: "OK", style: .cancel)
+         
+         alert.addAction(noAction)
+         
+         present(alert, animated: true)
+         
+     }
+    
     
 }
 
@@ -280,7 +297,7 @@ extension IntuitionSelectViewController {
 }
 
 extension IntuitionSelectViewController {
-    @objc func tappedResutaurantInfoView() {
+    @objc func tappedRestaurantInfoView() {
         print("tapされたよ")
     }
 }

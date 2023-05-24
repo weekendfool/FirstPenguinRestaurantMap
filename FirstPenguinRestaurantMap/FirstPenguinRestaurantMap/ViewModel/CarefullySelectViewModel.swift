@@ -20,7 +20,7 @@ protocol CarefullySelectViewModelType {
 
 
 final class CarefullySelectViewModel {
-    private let resutaurantModel: ResutaurantModel = ResutaurantModel()
+    private let restaurantModel: RestaurantModel = RestaurantModel()
     
 }
 
@@ -32,7 +32,7 @@ extension CarefullySelectViewModel: CarefullySelectViewModelType {
         // 電波の状況
         let comunnicationState: Observable<[Any]>
         // 画面遷移
-        let goMapView: Observable<[Any]>
+        let tappedCell: Observable<[Any]>
     }
     
     struct carefullySelectViewOutput {
@@ -56,7 +56,7 @@ extension CarefullySelectViewModel: CarefullySelectViewModelType {
         
         let reloadRestaurantData = input.isMadeStoryboard
             .map { _ in
-                self.resutaurantModel.reloadResutaurantArray()
+                self.restaurantModel.reloadRestaurantArray(isSelected: false)
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
@@ -64,16 +64,17 @@ extension CarefullySelectViewModel: CarefullySelectViewModelType {
         let restaurantData = reloadRestaurantData.asObservable()
             .filter {$0 == true }
             .map { result in
-                self.resutaurantModel.setResutaurantData()
+                self.restaurantModel.setRestaurantData()
             }
             .merge()
             .asDriver(onErrorDriveWith: .empty())
         
         
-        let goMapView = input.goMapView.asObservable()
-            .map { _ in
-                return true
+        let goMapView = input.tappedCell.asObservable()
+            .map { index in
+                self.restaurantModel.selectRestaurant(indexPath: index.first as! Int)
             }
+            .merge()
             .asDriver(onErrorDriveWith: .empty())
         
         return carefullySelectViewOutput(
